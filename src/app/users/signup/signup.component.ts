@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/users.service';
-import { FormsModule, FormGroup, FormBuilder } from '@angular/forms';
+import { FormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,16 +11,17 @@ import { FormsModule, FormGroup, FormBuilder } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
 
-  public myForm!: FormGroup;
+  public errorMessage: boolean = false;
+  public signUpForm!: FormGroup;
   public role: string[] = ['Teacher', 'Student']
 
 
-  constructor(private signup: UsersService, private formBuilder: FormBuilder) {
-    this.myForm = this.formBuilder.group({
-      name: '',
-      email: '',
-      password: '',
-      role: ''
+  constructor(private signup: UsersService, private formBuilder: FormBuilder, private router: Router) {
+    this.signUpForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      role: ['', [Validators.required]]
     })
   }
 
@@ -28,15 +30,23 @@ export class SignupComponent implements OnInit {
   }
   public onSignUp() {
     this.signup.getData({
-      name: this.myForm.value.name,
-      email: this.myForm.value.email,
-      password: this.myForm.value.password,
-      role: this.myForm.value.role
+      name: this.signUpForm.value.name,
+      email: this.signUpForm.value.email,
+      password: this.signUpForm.value.password,
+      role: this.signUpForm.value.role
     }).subscribe({
       next: (res) => {
         console.log('res :>> ', res);
+        this.router.navigate(['login']);
+      },
+      error: (err) => {
+        this.errorMessage = true;
       }
     })
+  }
+
+  get fControl() {
+    return this.signUpForm.controls;
   }
 
 }

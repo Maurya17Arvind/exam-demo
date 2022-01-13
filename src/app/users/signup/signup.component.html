@@ -1,19 +1,34 @@
 <h1 class="text-center mt-5">Sign Up</h1>
 <div class="d-flex justify-content-center">
-    <form class="bg-secondary w-50" [formGroup]="myForm" (ngSubmit)="onSignUp()">
+    <form class="card w-50" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
         <div class="m-3">
             <label for="exampleInputEmail1" class="form-label">Name</label>
             <input type="text" name="name" formControlName="name" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
+            <div class="text-danger" *ngIf="signUpForm.get('name')?.touched">
+                Name is required
+            </div>
         </div>
         <div class="m-3">
             <label for="exampleInputPassword1" class="form-label">Email</label>
             <input type="email" name="email" formControlName="email" class="form-control" id="exampleInputPassword1">
+            <div class="text-danger" *ngIf="fControl['email'].touched && fControl['email'].errors?.['required']">
+                Eamil is required
+            </div>
+            <div class="text-danger" *ngIf="fControl['email'].touched && fControl['email'].errors?.['email']">
+                Eamil is not valid
+            </div>
         </div>
         <div class="m-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" name="password" formControlName="password" class="form-control"
                 id="exampleInputPassword1">
+            <div class="text-danger" *ngIf="fControl['password'].touched && fControl['password'].errors?.['required']">
+                Password is required
+            </div>
+            <div class="text-danger" *ngIf="fControl['password'].touched && fControl['password'].errors?.['minlength']">
+                Password is length 6.
+            </div>
         </div>
         <div class="m-3">
             <select class="form-control w-25" formControlName="role" name="role">
@@ -21,7 +36,11 @@
                 <option value="Teacher">Teacher</option>
                 <option value="Student">Student</option>
             </select>
-            <button type="submit" class="btn btn-primary mt-5">Submit</button>
+            <div class="text-danger" *ngIf="fControl['role'].touched && fControl['role'].errors?.['required']">
+                Please select one option.
+            </div>
+            <p *ngIf="errorMessage" class="text-danger">Please Enter Valid Data</p>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </div>
     </form>
 </div>
