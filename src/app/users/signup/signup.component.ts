@@ -29,14 +29,15 @@ export class SignupComponent implements OnInit {
 
   }
   public onSignUp() {
-    this.signup.getData({
-      name: this.signUpForm.value.name,
-      email: this.signUpForm.value.email,
-      password: this.signUpForm.value.password,
-      role: this.signUpForm.value.role
-    }).subscribe({
+    this.signup.getData(this.signUpForm.value
+      // {
+      //   name: this.signUpForm.value.name,
+      //   email: this.signUpForm.value.email,
+      //   password: this.signUpForm.value.password,
+      //   role: this.signUpForm.value.role
+      // }
+    ).subscribe({
       next: (res) => {
-        console.log('res :>> ', res);
         this.router.navigate(['login']);
       },
       error: (err) => {

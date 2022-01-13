@@ -5,8 +5,8 @@
             <label for="exampleInputEmail1" class="form-label">Name</label>
             <input type="text" name="name" formControlName="name" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
-            <div class="text-danger" *ngIf="signUpForm.get('name')?.touched">
-                Name is required
+            <div class="text-danger" *ngIf="fControl['name'].touched && fControl['name'].errors?.['required']">
+                Eamil is required
             </div>
         </div>
         <div class="m-3">

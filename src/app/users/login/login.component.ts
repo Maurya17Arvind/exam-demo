@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/users.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent implements OnInit {
 
   public loginForm!: FormGroup
-  constructor(private loginService: UsersService, private formBuilder: FormBuilder, private toster: ToastrService) {
+  constructor(private loginService: UsersService, private formBuilder: FormBuilder, private toster: ToastrService, private router: Router) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -26,11 +27,20 @@ export class LoginComponent implements OnInit {
     this.loginService.loginData(this.loginForm.value).subscribe({
       next: (res) => {
         // console.log('res', res);
-        this.toster.success(res.message);
+        if (res.data.role === 'teacher') {
+          console.log(`res.data`, res.data);
+          // localStorage.setItem(res.data.token)
+          this.toster.success(res.message);
+          this.router.navigate(['teacher'])
+        }
+        else {
+          this.toster.success(res.message);
+          this.router.navigate(['student'])
+        }
       },
       error: (err) => {
         // console.log('err', err);
-        this.toster.error(err.message);
+        this.toster.error(err.error.message);
       }
     })
   }
