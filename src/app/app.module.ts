@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { StudentModule } from './student/student.module';
 import { TeacherModule } from './teacher/teacher.module';
 import { UsersModule } from './users/users.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,10 @@ import { UsersModule } from './users/users.module';
     AppRoutingModule,
     UsersModule,
     StudentModule,
-    TeacherModule
+    TeacherModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,17 @@
-<p>login works!</p>
+<h1>Login</h1>
+<div class="d-flex justify-content-center">
+    <form class="bg-secondary w-50" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="m-3">
+            <label for="exampleInputPassword1" class="form-label">Email</label>
+            <input type="email" name="email" formControlName="email" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="m-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" formControlName="password" class="form-control"
+                id="exampleInputPassword1">
+        </div>
+        <div class="m-3">
+            <button type="submit" class="btn btn-primary mt-5">Submit</button>
+        </div>
+    </form>
+</div>

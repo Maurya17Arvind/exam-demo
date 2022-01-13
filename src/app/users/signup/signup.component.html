@@ -1,30 +1,27 @@
-<form>
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Name</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown button
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-    </div>
-    <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<h1 class="text-center mt-5">Sign Up</h1>
+<div class="d-flex justify-content-center">
+    <form class="bg-secondary w-50" [formGroup]="myForm" (ngSubmit)="onSignUp()">
+        <div class="m-3">
+            <label for="exampleInputEmail1" class="form-label">Name</label>
+            <input type="text" name="name" formControlName="name" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp">
+        </div>
+        <div class="m-3">
+            <label for="exampleInputPassword1" class="form-label">Email</label>
+            <input type="email" name="email" formControlName="email" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="m-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password" formControlName="password" class="form-control"
+                id="exampleInputPassword1">
+        </div>
+        <div class="m-3">
+            <select class="form-control w-25" formControlName="role" name="role">
+                <option value="">Select Option</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Student">Student</option>
+            </select>
+            <button type="submit" class="btn btn-primary mt-5">Submit</button>
+        </div>
+    </form>
+</div>
