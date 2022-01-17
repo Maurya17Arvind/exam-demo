@@ -30,6 +30,7 @@ import { HeaderComponent } from './header/header.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })

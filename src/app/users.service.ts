@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -7,12 +7,21 @@ import { Observable } from 'rxjs';
 })
 export class UsersService {
 
+  public token = localStorage.getItem('token') || '';
+
+  public header = new HttpHeaders().set('access-token', this.token);
+
   constructor(private http: HttpClient) { }
-  getData(signUp: any): Observable<any> {
+
+  public signUpData(signUp: any): Observable<any> {
     return this.http.post('https://nodejsexamination.herokuapp.com/users/SignUp', signUp)
   }
 
-  loginData(login: any): Observable<any> {
+  public loginData(login: any): Observable<any> {
     return this.http.post('https://nodejsexamination.herokuapp.com/users/Login', login);
+  }
+
+  public getData() {
+    return this.http.get('https://nodejsexamination.herokuapp.com/dashboard/Teachers', { headers: this.header })
   }
 }

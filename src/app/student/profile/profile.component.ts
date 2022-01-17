@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/users.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  public token: any;
+
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
+    // this.token = localStorage.getItem('token');
+
   }
 
   public carsAbout = [
@@ -32,5 +37,7 @@ export class ProfileComponent implements OnInit {
       text: "Some quick example text to build on the card title and make up the bulk of the card's content 1."
     },
   ];
+
+
 
 }

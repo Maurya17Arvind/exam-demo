@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   public loginForm!: FormGroup
   constructor(private loginService: UsersService, private formBuilder: FormBuilder, private toster: ToastrService, private router: Router) {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['arvind.tagline@gmail.com', [Validators.required, Validators.email]],
+      password: ['Arvind@', [Validators.required, Validators.minLength(6)]],
     })
   }
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         // console.log('res', res);
         if (res.data.role === 'teacher') {
           console.log(`res.data`, res.data);
-          // localStorage.setItem(res.data.token)
+          localStorage.setItem('token', res.data.token)
           this.toster.success(res.message);
           this.router.navigate(['teacher'])
         }

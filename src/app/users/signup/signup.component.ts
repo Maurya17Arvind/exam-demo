@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
 
   }
   public onSignUp() {
-    this.signup.getData(this.signUpForm.value
+    this.signup.signUpData(this.signUpForm.value
       // {
       //   name: this.signUpForm.value.name,
       //   email: this.signUpForm.value.email,

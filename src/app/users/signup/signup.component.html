@@ -2,16 +2,16 @@
 <div class="d-flex justify-content-center">
     <form class="card w-50" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
         <div class="m-3">
-            <label for="exampleInputEmail1" class="form-label">Name</label>
-            <input type="text" name="name" formControlName="name" class="form-control" id="exampleInputEmail1"
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input type="text" name="name" formControlName="name" class="form-control" id="exampleInputName"
                 aria-describedby="emailHelp">
             <div class="text-danger" *ngIf="fControl['name'].touched && fControl['name'].errors?.['required']">
                 Eamil is required
             </div>
         </div>
         <div class="m-3">
-            <label for="exampleInputPassword1" class="form-label">Email</label>
-            <input type="email" name="email" formControlName="email" class="form-control" id="exampleInputPassword1">
+            <label for="exampleInputEmail   " class="form-label">Email</label>
+            <input type="email" name="email" formControlName="email" class="form-control" id="exampleInputEmail">
             <div class="text-danger" *ngIf="fControl['email'].touched && fControl['email'].errors?.['required']">
                 Eamil is required
             </div>
