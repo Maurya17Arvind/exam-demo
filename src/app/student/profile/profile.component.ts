@@ -10,7 +10,7 @@ import { UsersService } from 'src/app/users.service';
 export class ProfileComponent implements OnInit {
 
   public token: any;
-  public studentStatus: string = '';
+  public studentRole: string = '';
   public studentId: string = '';
   public studentName: string = '';
   public studentEmail: string = '';
@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
     this.studentProlfile.studentProlfile().subscribe({
       next: (res: any) => {
         console.log(`res`, res)
-        this.studentStatus = res.data.role;
+        this.studentRole = res.data.role;
         this.studentId = res.data._id;
         this.studentName = res.data.name;
         this.studentEmail = res.data.email;
