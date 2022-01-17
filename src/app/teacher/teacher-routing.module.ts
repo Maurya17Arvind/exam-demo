@@ -13,7 +13,7 @@ const routes: Routes = [
     component: StudentDataListComponent
   },
   {
-    path: 'viewDetail',
+    path: 'viewDetail/:_id',
     component: ViewStudentDetailsComponent
   }
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UsersService } from 'src/app/users.service';
 
 @Component({
   selector: 'app-view-student-details',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewStudentDetailsComponent implements OnInit {
 
-  constructor() { }
+  public id: any;
+  public data: any;
+  constructor(private router: ActivatedRoute, private getService: UsersService) { }
 
   ngOnInit(): void {
+    this.id = this.router.snapshot.params['_id'];
+    console.log(`this.id`, this.id)
+    this.getData();
   }
 
+  public getData() {
+    this.getService.viewData(this.id).subscribe(res => {
+      console.log(`res`, res)
+      this.data = res;
+    })
+  }
 }

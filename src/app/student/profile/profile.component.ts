@@ -24,11 +24,13 @@ export class ProfileComponent implements OnInit {
     // this.token = localStorage.getItem('token');
     this.studentProlfile.studentProlfile().subscribe({
       next: (res: any) => {
-        console.log(`res`, res)
-        this.studentRole = res.data.role;
-        this.studentId = res.data._id;
-        this.studentName = res.data.name;
-        this.studentEmail = res.data.email;
+        // console.log(`res`, res)
+        setTimeout(() => {
+          this.studentRole = res.data.role;
+          this.studentId = res.data._id;
+          this.studentName = res.data.name;
+          this.studentEmail = res.data.email;
+        }, 1000)
       }
     })
 

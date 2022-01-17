@@ -7,10 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class UsersService {
 
+  // public isLogOut: boolean = false;
   public token = localStorage.getItem('token') || '';
   public header = new HttpHeaders().set('access-token', this.token);
-  public studentToken = localStorage.getItem('token') || '';
-  public studentHeader = new HttpHeaders().set('access-token', this.studentToken);
+  // public studentToken = localStorage.getItem('token') || '';
+  // public studentHeader = new HttpHeaders().set('access-token', this.studentToken);
 
 
 
@@ -25,11 +26,15 @@ export class UsersService {
     return this.http.post('https://nodejsexamination.herokuapp.com/users/Login', login);
   }
 
-  public getData() {
+  public getData(): Observable<any> {
     return this.http.get('https://nodejsexamination.herokuapp.com/dashboard/Teachers', { headers: this.header })
   }
 
-  public studentProlfile() {
-    return this.http.get('https://nodejsexamination.herokuapp.com/student/getStudentDetail', { headers: this.studentHeader })
+  public studentProlfile(): Observable<any> {
+    return this.http.get('https://nodejsexamination.herokuapp.com/student/getStudentDetail', { headers: this.header })
+  }
+
+  public viewData(id: any): Observable<any> {
+    return this.http.get(`https://nodejsexamination.herokuapp.com/dashboard/Teachers/viewStudentDetail?id=${id}`, { headers: this.header })
   }
 }

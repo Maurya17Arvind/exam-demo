@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  // public isLogIn: boolean = false;
   public loginForm!: FormGroup
   constructor(private loginService: UsersService, private formBuilder: FormBuilder, private toster: ToastrService, private router: Router) {
     this.loginForm = this.formBuilder.group({
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
         // console.log('res', res);
         if (res.data.role === 'teacher') {
           // console.log(`res.data`, res.data);
+          // this.isLogIn = this.loginService.isLogOut = true;
           localStorage.setItem('token', res.data.token)
           this.toster.success(res.message);
           this.router.navigate(['teacher'])
