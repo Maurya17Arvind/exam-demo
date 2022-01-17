@@ -8,8 +8,12 @@ import { Observable } from 'rxjs';
 export class UsersService {
 
   public token = localStorage.getItem('token') || '';
-
   public header = new HttpHeaders().set('access-token', this.token);
+  public studentToken = localStorage.getItem('token') || '';
+  public studentHeader = new HttpHeaders().set('access-token', this.studentToken);
+
+
+
 
   constructor(private http: HttpClient) { }
 
@@ -23,5 +27,9 @@ export class UsersService {
 
   public getData() {
     return this.http.get('https://nodejsexamination.herokuapp.com/dashboard/Teachers', { headers: this.header })
+  }
+
+  public studentProlfile() {
+    return this.http.get('https://nodejsexamination.herokuapp.com/student/getStudentDetail', { headers: this.studentHeader })
   }
 }

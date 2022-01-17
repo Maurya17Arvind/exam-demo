@@ -28,12 +28,13 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         // console.log('res', res);
         if (res.data.role === 'teacher') {
-          console.log(`res.data`, res.data);
+          // console.log(`res.data`, res.data);
           localStorage.setItem('token', res.data.token)
           this.toster.success(res.message);
           this.router.navigate(['teacher'])
         }
         else {
+          localStorage.setItem('token', res.data.token)
           this.toster.success(res.message);
           this.router.navigate(['student'])
         }
