@@ -41,3 +41,11 @@ export interface LoginResponse {
     message: string,
     statusCode: number
 }
+
+export interface ViewExamData {
+    email: string,
+    notes: string[],
+    subjectName: string,
+    _id: string,
+    __v: string
+}

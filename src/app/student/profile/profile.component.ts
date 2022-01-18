@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { StudentProfile } from 'src/app/AllInterFace/student-list';
 import { UsersService } from 'src/app/users.service';
 
@@ -16,7 +17,7 @@ export class ProfileComponent implements OnInit {
   public studentEmail: string = '';
 
 
-  constructor(private studentProlfile: UsersService) { }
+  constructor(private studentProlfile: UsersService, private toster: ToastrService) { }
 
 
 
@@ -30,7 +31,11 @@ export class ProfileComponent implements OnInit {
           this.studentId = res.data._id;
           this.studentName = res.data.name;
           this.studentEmail = res.data.email;
+          this.toster.success(res.message);
         }, 1000)
+      },
+      error: (err: any) => {
+        this.toster.error(err.message);
       }
     })
 

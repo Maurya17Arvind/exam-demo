@@ -1,4 +1,4 @@
-<div class="accordion mt-3" id="accordionExample" *ngFor="let viewExamList of viewExamLists">
+<!-- <div class="accordion mt-3" id="accordionExample" *ngFor="let viewExamList of viewExamLists">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
@@ -9,12 +9,45 @@
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <ul class="list-group">
-                    <li class="list-group-item">Email:-{{viewExamList.email}}</li>
-                    <li class="list-group-item">Id:-{{viewExamList._id}}</li>
-                    <li class="list-group-item">Note:-{{viewExamList.note}}</li>
-                    <li class="list-group-item">V:-{{viewExamList.__v}}</li>
-                </ul>
+                <table>
+                    <tr>
+                        <td class="list-group-item">Email :- {{viewExamList.email}}</td>
+                        <td class="list-group-item">Id :- {{viewExamList._id}}</td>
+                        <td class="list-group-item">Note :- {{viewExamList.notes}}</td>
+                        <td class="list-group-item">V :- {{viewExamList.__v}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- Button trigger modal -->
+<div *ngFor="let viewExamList of viewExamLists">
+    <!-- <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        {{viewExamList.subjectName}}
+    </button> -->
+    <button class="accordion-button" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        aria-expanded="true" aria-controls="collapseOne" (click)="open(viewExamList._id)">
+        {{viewExamList.subjectName}}
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">{{subjectName}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{email}}</p>
+                    <p>{{id}}</p>
+                    <p>{{note}}</p>
+                    <p>{{v}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>

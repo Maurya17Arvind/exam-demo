@@ -11,12 +11,7 @@ import { StudentList, StudentListResponse } from 'src/app/AllInterFace/student-l
 })
 export class StudentDataListComponent implements OnInit {
 
-  public studentsList: StudentList[] = [{
-    status: '',
-    _id: '',
-    name: '',
-    email: ''
-  }]
+  public studentsList: StudentList[] = [];
 
   constructor(private accessData: UsersService, private toster: ToastrService) { }
 
