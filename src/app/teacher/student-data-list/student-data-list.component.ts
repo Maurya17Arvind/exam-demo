@@ -23,7 +23,7 @@ export class StudentDataListComponent implements OnInit {
   ngOnInit(): void {
     this.accessData.getData().subscribe({
       next: (res: any) => {
-        console.log(`res`, res);
+        // console.log(`res`, res);
         this.studentsList = res.data;
         this.toster.success(res.message);
       },
