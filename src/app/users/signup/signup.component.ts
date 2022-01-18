@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/users.service';
 import { FormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, Routes } from '@angular/router';
+import { SignUpResponse } from 'src/app/AllInterFace/student-list';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +18,7 @@ export class SignupComponent implements OnInit {
   public role: string[] = ['Teacher', 'Student']
 
 
-  constructor(private signup: UsersService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private signup: UsersService, private formBuilder: FormBuilder, private router: Router, private toster: ToastrService) {
     this.signUpForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -37,11 +39,14 @@ export class SignupComponent implements OnInit {
       //   role: this.signUpForm.value.role
       // }
     ).subscribe({
-      next: (res) => {
+      next: (res: SignUpResponse) => {
         this.router.navigate(['login']);
+        this.toster.success(res.message);
+        console.warn('signup', res)
       },
       error: (err) => {
         this.errorMessage = true;
+        this.toster.error(err.message);
       }
     })
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/users.service';
 import { ToastrService } from 'ngx-toastr';
-import { StudentList } from 'src/app/AllInterFace/student-list';
+import { StudentList, StudentListResponse } from 'src/app/AllInterFace/student-list';
 
 
 @Component({
@@ -22,8 +22,8 @@ export class StudentDataListComponent implements OnInit {
 
   ngOnInit(): void {
     this.accessData.getData().subscribe({
-      next: (res: any) => {
-        // console.log(`res`, res);
+      next: (res: StudentListResponse) => {
+        console.log(`res`, res);
         this.studentsList = res.data;
         this.toster.success(res.message);
       },

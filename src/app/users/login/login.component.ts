@@ -3,6 +3,7 @@ import { FormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { UsersService } from 'src/app/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { LoginResponse } from 'src/app/AllInterFace/student-list';
 
 
 @Component({
@@ -26,8 +27,8 @@ export class LoginComponent implements OnInit {
 
   public onLogin() {
     this.loginService.loginData(this.loginForm.value).subscribe({
-      next: (res) => {
-        // console.log('res', res);
+      next: (res: LoginResponse) => {
+        console.log('login', res);
         if (res.data.role === 'teacher') {
           // console.log(`res.data`, res.data);
           // this.isLogIn = this.loginService.isLogOut = true;

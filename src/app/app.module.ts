@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { StudentModule } from './student/student.module';
 import { TeacherModule } from './teacher/teacher.module';
 import { UsersModule } from './users/users.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
+import { JwtInterceptor } from './interceptor/jwt.interceptor';
 
 
 @NgModule({
@@ -30,8 +31,8 @@ import { HeaderComponent } from './header/header.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
   ],
-  
-  providers: [],
+
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

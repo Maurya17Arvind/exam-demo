@@ -8,9 +8,15 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  public isLogin: boolean = true;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('token')) {
+      this.isLogin = true;
+    } else {
+      this.isLogin = false;
+    }
   }
 
   public clearToken() {

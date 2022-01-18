@@ -1,1 +1,43 @@
-<p>create-exam works!</p>
+<div class="d-flex justify-content-center">
+    <div>
+        <h1 class="mt-5">Add Exam Question From</h1>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary mt-5" (click)="createExam()">Create Exam</button>
+    </div>
+</div>
+<div class="d-flex justify-content-center">
+    <form class="card w-50" [formGroup]="examForm">
+        <div class="m-3">
+            <label for="exampleInputQuestion" class="form-label">Exam Name</label>
+            <input type="text" name="question" placeholder="Enter Exam Name" class="form-control"
+                id="exampleInputExamName" aria-describedby="emailHelp">
+        </div>
+        <div class="m-3">
+            <label for="exampleInputQuestion" class="form-label">Question</label>
+            <input type="text" name="question" formControlName="question" class="form-control"
+                placeholder="Enter Question" id="exampleInputQuestion" aria-describedby="emailHelp">
+            <label for="exampleInputOption" class="form-label">Option</label>
+            <div class="d-flex justify-content-between flex-wrap">
+                <input type="text" name="option1" placeholder="A" formControlName="option1"
+                    class="form-control w-50 mt-1">
+                <input type="text" name="option2" placeholder="B" formControlName="option2"
+                    class="form-control w-50 mt-1">
+                <input type="text" name="option3" placeholder="C" formControlName="option3"
+                    class="form-control w-50 mt-1">
+                <input type="text" name="option4" placeholder="D" formControlName="option4"
+                    class="form-control w-50 mt-1">
+            </div>
+        </div>
+        <div class="m-3">
+            <button type="submit" class="btn btn-primary mt-3" (click)="addQuestion()">Add Question</button>
+        </div>
+    </form>
+</div>
+<!-- <div class="card" *ngFor="let question of examQuestions">
+    <h1>{{question.question}}</h1>
+    {{question.option1}}
+    {{question.option2}}
+    {{question.option3}}
+    {{question.option4}}
+</div> -->

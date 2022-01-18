@@ -23,8 +23,8 @@ export class ViewStudentDetailsComponent implements OnInit {
   }
 
   public getData() {
-    this.getService.viewData(this.id).subscribe(res => {
-      // console.log(`res`, res)
+    this.getService.viewData(this.id).subscribe((res) => {
+      console.log(`view`, res)
       if (res.statusCode === 200) {
         this._id = res.data[0]._id;
         this.name = res.data[0].name;
