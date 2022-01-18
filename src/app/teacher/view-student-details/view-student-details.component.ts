@@ -10,7 +10,9 @@ import { UsersService } from 'src/app/users.service';
 export class ViewStudentDetailsComponent implements OnInit {
 
   public id: any;
-  public data: any;
+  public _id!: string;
+  public name!: string;
+  public email!: string;
   constructor(private router: ActivatedRoute, private getService: UsersService) { }
 
   ngOnInit(): void {
@@ -21,8 +23,10 @@ export class ViewStudentDetailsComponent implements OnInit {
 
   public getData() {
     this.getService.viewData(this.id).subscribe(res => {
-      console.log(`res`, res)
-      this.data = res;
+      // console.log(`res`, res)
+      this._id = res.data[0]._id;
+      this.name = res.data[0].name;
+      this.email = res.data[0].email;
     })
   }
 }

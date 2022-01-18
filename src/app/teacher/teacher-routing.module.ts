@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'viewDetail/:_id',
     component: ViewStudentDetailsComponent
+  },
+  {
+    path: 'viewDetail',
+    component: ViewStudentDetailsComponent
   }
 
 ];
