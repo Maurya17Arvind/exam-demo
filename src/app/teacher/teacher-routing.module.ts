@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateExamComponent } from './create-exam/create-exam.component';
 import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
 import { StudentDataListComponent } from './student-data-list/student-data-list.component';
+import { VerifyStudentDataComponent } from './verify-student-data/verify-student-data.component';
 import { ViewExamDetailsComponent } from './view-exam-details/view-exam-details.component';
 import { ViewExamComponent } from './view-exam/view-exam.component';
 import { ViewStudentDetailsComponent } from './view-student-details/view-student-details.component';
@@ -10,10 +11,6 @@ import { ViewStudentDetailsComponent } from './view-student-details/view-student
 const routes: Routes = [
   {
     path: '',
-    component: HomeTeacherComponent
-  },
-  {
-    path: 'teacher',
     component: HomeTeacherComponent
   },
   {
@@ -44,6 +41,14 @@ const routes: Routes = [
     path: 'viewExamDetail/:_id',
     component: ViewExamDetailsComponent
   },
+  {
+    path: 'verifyStudent',
+    component: VerifyStudentDataComponent
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({

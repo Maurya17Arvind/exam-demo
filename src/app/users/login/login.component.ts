@@ -31,8 +31,10 @@ export class LoginComponent implements OnInit {
         console.log('login', res);
         if (res.data.role === 'teacher') {
           console.log(`res.data`, res.data);
-          // this.isLogIn = this.loginService.isLogOut = true;
           localStorage.setItem('token', res.data.token)
+          localStorage.setItem('name', res.data.name)
+          localStorage.setItem('email', res.data.email)
+          // console.log(`res.data.name`, res.data.name)
           this.toster.success(res.message);
           this.router.navigate(['teacher'])
         }
@@ -43,7 +45,6 @@ export class LoginComponent implements OnInit {
         }
       },
       error: (err) => {
-        // console.log('err', err);
         this.toster.error(err.error.message);
       }
     })

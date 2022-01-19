@@ -12,15 +12,20 @@ import { StudentList, StudentListResponse } from 'src/app/AllInterFace/student-l
 export class StudentDataListComponent implements OnInit {
 
   public studentsList: StudentList[] = [];
-
+  public backButton: boolean = false;
   constructor(private accessData: UsersService, private toster: ToastrService) { }
 
   ngOnInit(): void {
     this.accessData.getData().subscribe({
       next: (res: StudentListResponse) => {
-        console.log(`res`, res);
-        this.studentsList = res.data;
-        this.toster.success(res.message);
+        if (res.statusCode == 200) {
+          console.log(`res`, res);
+          this.studentsList = res.data;
+          this.toster.success(res.message);
+          this.backButton = true;
+        } else {
+          this.toster.error(res.message);
+        }
       },
       error: (err) => {
         this.toster.error(err.message);

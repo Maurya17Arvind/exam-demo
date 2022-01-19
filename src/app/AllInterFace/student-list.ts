@@ -6,13 +6,13 @@ export interface StudentList {
     name: string,
     email: string
 }
-export interface StudentProfile {
-    image: string,
-    status: string,
-    _id: string,
-    name: string,
-    email: string
-}
+// export interface StudentProfile {
+//     image: string,
+//     status: string,
+//     _id: string,
+//     name: string,
+//     email: string
+// }
 export interface StudentListResponse {
     count: number,
     data: StudentList[],
@@ -41,7 +41,6 @@ export interface LoginResponse {
     message: string,
     statusCode: number
 }
-
 export interface ViewExamData {
     email: string,
     notes: string[],
@@ -49,10 +48,27 @@ export interface ViewExamData {
     _id: string,
     __v: string
 }
-
 export interface ViewExamDetail {
     options: string[],
     questions: string[],
     question: string,
     answer: string
+}
+
+export interface StudentProfileData {
+    _id: string,
+    name: string,
+    email: string,
+    role: string
+}
+export interface StudentProfile {
+    data: StudentProfileData,
+    statusCode: number,
+    message: string
+}
+export interface VerifyData{
+    status: string,
+    _id: string,
+    name: string,
+    email: string,
 }

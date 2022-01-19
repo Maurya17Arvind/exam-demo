@@ -19,6 +19,7 @@ export class ViewExamComponent implements OnInit {
   public v!: string;
 
   public viewExamLists: ViewExamData[] = []
+
   constructor(private viewExam: UsersService, private router: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit(): void {

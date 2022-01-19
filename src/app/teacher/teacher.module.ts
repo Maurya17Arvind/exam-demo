@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewExamComponent } from './view-exam/view-exam.component';
 import { ViewExamDetailsComponent } from './view-exam-details/view-exam-details.component';
 import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
+import { VerifyStudentDataComponent } from './verify-student-data/verify-student-data.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
     CreateExamComponent,
     ViewExamComponent,
     ViewExamDetailsComponent,
-    HomeTeacherComponent
+    HomeTeacherComponent,
+    VerifyStudentDataComponent
   ],
   imports: [
     CommonModule,

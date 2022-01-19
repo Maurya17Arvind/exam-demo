@@ -8,10 +8,13 @@ import { UsersService } from 'src/app/users.service';
 })
 export class HomeTeacherComponent implements OnInit {
 
+  public name: any = '';
+  public email!: any;
   constructor(private teacherService: UsersService) { }
 
   ngOnInit(): void {
-
+    this.name = localStorage.getItem('name');
+    this.email = localStorage.getItem('email');
     // this.teacherService.loginData().subscribe()
   }
 
