@@ -49,3 +49,10 @@ export interface ViewExamData {
     _id: string,
     __v: string
 }
+
+export interface ViewExamDetail {
+    options: string[],
+    questions: string[],
+    question: string,
+    answer: string
+}

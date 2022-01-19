@@ -40,7 +40,11 @@ export class UsersService {
   public createExam(examData: any): Observable<any> {
     return this.http.post('https://nodejsexamination.herokuapp.com/dashboard/Teachers/Exam', examData)
   }
+
   public viewExam(): Observable<any> {
     return this.http.get('https://nodejsexamination.herokuapp.com/dashboard/Teachers/viewExam')
+  }
+  public viewExamDeatils(id: string): Observable<any> {
+    return this.http.get(`https://nodejsexamination.herokuapp.com/dashboard/Teachers/examDetail?id=${id}`)
   }
 }

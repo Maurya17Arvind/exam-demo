@@ -22,17 +22,13 @@ export class ViewExamComponent implements OnInit {
   constructor(private viewExam: UsersService, private router: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    this.id = this.router.snapshot.params['_id'];
+    // console.log(`this.id`, this.id)
     this.viewExam.viewExam().subscribe({
       next: (res) => {
-        // console.log(`viewExam`, res.data)
+        console.log(`viewExam`, res.data)
         this.viewExamLists = res.data;
         this.toastr.success(res.message);
-        // console.log(`this.viewExamLists`, this.viewExamLists)
-        // this.email = res.data[0].email;
-        // this.note = res.data[0].notes;
-        // this.subjectName = res.data[0].subjectName;
-        // this.id = res.data[0]._id;
-        // this.v = res.data[0].__v;
       },
       error: (err) => {
         this.toastr.error(err.message);
@@ -42,9 +38,10 @@ export class ViewExamComponent implements OnInit {
 
   public open(id: string) {
     this.viewExamLists.find((e) => {
-      console.log(`v`, e)
+      // console.log(`v`, e)
       if (e._id == id) {
         this.email = e.email;
+        // console.log(`e._id`, e._id)
         this.note = e.notes;
         // console.log(`this.note`, this.note)
         this.subjectName = e.subjectName;

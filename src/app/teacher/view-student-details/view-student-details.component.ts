@@ -10,7 +10,7 @@ import { UsersService } from 'src/app/users.service';
 })
 export class ViewStudentDetailsComponent implements OnInit {
 
-  public id: any;
+  public id!: string;
   public _id!: string;
   public name!: string;
   public email!: string;
@@ -18,7 +18,7 @@ export class ViewStudentDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.router.snapshot.params['_id'];
-    // console.log(`this.id`, this.id)
+    console.log(`this.id`, this.id)
     this.getData();
   }
 

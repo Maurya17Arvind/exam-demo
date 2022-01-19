@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       next: (res: LoginResponse) => {
         console.log('login', res);
         if (res.data.role === 'teacher') {
-          // console.log(`res.data`, res.data);
+          console.log(`res.data`, res.data);
           // this.isLogIn = this.loginService.isLogOut = true;
           localStorage.setItem('token', res.data.token)
           this.toster.success(res.message);

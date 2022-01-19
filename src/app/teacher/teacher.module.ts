@@ -7,6 +7,8 @@ import { ViewStudentDetailsComponent } from './view-student-details/view-student
 import { CreateExamComponent } from './create-exam/create-exam.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ViewExamComponent } from './view-exam/view-exam.component';
+import { ViewExamDetailsComponent } from './view-exam-details/view-exam-details.component';
+import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { ViewExamComponent } from './view-exam/view-exam.component';
     StudentDataListComponent,
     ViewStudentDetailsComponent,
     CreateExamComponent,
-    ViewExamComponent
+    ViewExamComponent,
+    ViewExamDetailsComponent,
+    HomeTeacherComponent
   ],
   imports: [
     CommonModule,

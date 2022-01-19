@@ -1,0 +1,11 @@
+<div class="card mt-4" *ngFor="let viewExamDetail of viewExamDeatils">
+    <div class="card-header">
+        <h3>{{viewExamDetail.question | titlecase}}</h3>
+    </div>
+    <div class="card-body">
+        <div *ngFor="let option of viewExamDetail.options">
+            <p class="card-title">{{option}}</p>
+        </div>
+        <h5 class="card-text">Answer:- {{viewExamDetail.answer}}</h5>
+    </div>
+</div>
