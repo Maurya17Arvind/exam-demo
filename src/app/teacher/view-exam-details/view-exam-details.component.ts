@@ -13,7 +13,7 @@ export class ViewExamDetailsComponent implements OnInit {
   public id!: string;
   public viewExamDeatils: ViewExamDetail[] = [];
 
-  constructor(private viewExamDetail: UsersService, private router: ActivatedRoute) { }
+  constructor(private usersService: UsersService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.router.snapshot.params['_id'];
@@ -22,10 +22,10 @@ export class ViewExamDetailsComponent implements OnInit {
   }
 
   public getExamPaper() {
-    this.viewExamDetail.viewExamDeatils(this.id).subscribe((res) => {
+    this.usersService.viewExamDeatils(this.id).subscribe((res) => {
       console.log(`res.data`, res);
-      // console.log(`this.id view`, this.id)
-      // console.log(`res.data.questions`, res.data.questions);
+      console.log(`this.id view`, this.id)
+      console.log(`res.data.questions`, res.data.questions);
       this.viewExamDeatils = res.data.questions;
       // console.log(`this.viewExamDeatils`, this.viewExamDeatils)
     })

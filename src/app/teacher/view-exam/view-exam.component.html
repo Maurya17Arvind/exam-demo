@@ -24,9 +24,6 @@
 
 <!-- Button trigger modal -->
 <div *ngFor="let viewExamList of viewExamLists">
-    <!-- <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        {{viewExamList.subjectName}}
-    </button> -->
     <button class="accordion-button" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
         aria-expanded="true" aria-controls="collapseOne" (click)="open(viewExamList._id)">
         {{viewExamList.subjectName}}
@@ -48,7 +45,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        [routerLink]="['/viewExamDetail/'+id]">View Exam
+                        [routerLink]="['/viewExamDetail/'+ id]">View Exam
                         Detail</button>
                 </div>
             </div>

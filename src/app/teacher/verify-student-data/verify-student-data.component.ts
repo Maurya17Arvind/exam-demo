@@ -15,10 +15,10 @@ export class VerifyStudentDataComponent implements OnInit {
   public email!: string;
   public _id!: string;
   public verifyDatas: VerifyData[] = []
-  constructor(private verifyStudentData: UsersService, private toster: ToastrService) { }
+  constructor(private userService: UsersService, private toster: ToastrService) { }
 
   ngOnInit(): void {
-    this.verifyStudentData.verifyStudentData().subscribe({
+    this.userService.verifyStudentData().subscribe({
       next: (res) => {
         if (res.statusCode == 200) {
           this.verifyDatas = res.data;

@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
   public role: string[] = ['Teacher', 'Student']
 
 
-  constructor(private signup: UsersService, private formBuilder: FormBuilder, private router: Router, private toster: ToastrService) {
+  constructor(private usersService: UsersService, private formBuilder: FormBuilder, private router: Router, private toster: ToastrService) {
     this.signUpForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
 
   }
   public onSignUp() {
-    this.signup.signUpData(this.signUpForm.value
+    this.usersService.signUpData(this.signUpForm.value
       // {
       //   name: this.signUpForm.value.name,
       //   email: this.signUpForm.value.email,

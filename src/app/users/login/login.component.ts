@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   // public isLogIn: boolean = false;
   public loginForm!: FormGroup
-  constructor(private loginService: UsersService, private formBuilder: FormBuilder, private toster: ToastrService, private router: Router) {
+  constructor(private usersService: UsersService, private formBuilder: FormBuilder, private toster: ToastrService, private router: Router) {
     this.loginForm = this.formBuilder.group({
       email: ['arvind.tagline@gmail.com', [Validators.required, Validators.email]],
       password: ['Arvind@', [Validators.required, Validators.minLength(6)]],
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   public onLogin() {
-    this.loginService.loginData(this.loginForm.value).subscribe({
+    this.usersService.loginData(this.loginForm.value).subscribe({
       next: (res: LoginResponse) => {
         console.log('login', res);
         if (res.data.role === 'teacher') {

@@ -14,7 +14,7 @@ export class ViewStudentDetailsComponent implements OnInit {
   public _id!: string;
   public name!: string;
   public email!: string;
-  constructor(private router: ActivatedRoute, private getService: UsersService, private toster: ToastrService) { }
+  constructor(private router: ActivatedRoute, private usersService: UsersService, private toster: ToastrService) { }
 
   ngOnInit(): void {
     this.id = this.router.snapshot.params['_id'];
@@ -23,7 +23,7 @@ export class ViewStudentDetailsComponent implements OnInit {
   }
 
   public getData() {
-    this.getService.viewData(this.id).subscribe((res) => {
+    this.usersService.viewData(this.id).subscribe((res) => {
       // console.log(`view`, res)
       if (res.statusCode === 200) {
         this._id = res.data[0]._id;

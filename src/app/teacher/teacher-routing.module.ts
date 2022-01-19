@@ -33,10 +33,10 @@ const routes: Routes = [
     path: 'viewExam',
     component: ViewExamComponent
   },
-  {
-    path: 'viewExamDetail',
-    component: ViewExamDetailsComponent
-  },
+  // {
+  //   path: 'viewExamDetail',
+  //   component: ViewExamDetailsComponent
+  // },
   {
     path: 'viewExamDetail/:_id',
     component: ViewExamDetailsComponent

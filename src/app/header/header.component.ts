@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
 
   public clearToken() {
     localStorage.removeItem("token");
+    this.isLogin = false;
     this.router.navigate(['/login']);
   }
 

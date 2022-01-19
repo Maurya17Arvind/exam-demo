@@ -13,10 +13,10 @@ export class StudentDataListComponent implements OnInit {
 
   public studentsList: StudentList[] = [];
   public backButton: boolean = false;
-  constructor(private accessData: UsersService, private toster: ToastrService) { }
+  constructor(private userService: UsersService, private toster: ToastrService) { }
 
   ngOnInit(): void {
-    this.accessData.getData().subscribe({
+    this.userService.getData().subscribe({
       next: (res: StudentListResponse) => {
         if (res.statusCode == 200) {
           console.log(`res`, res);

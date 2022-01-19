@@ -66,7 +66,16 @@ export class UsersService {
   }
   //teacher folder get exam paper start
 
+  //teacher folder verify student start
   public verifyStudentData(): Observable<any> {
     return this.http.get('https://nodejsexamination.herokuapp.com/dashboard/Teachers/StudentForExam')
   }
+  //teacher folder verify student end
+
+  //student folder exam paper start
+  public getPaper(id: string): Observable<any> {
+    return this.http.get(`https://nodejsexamination.herokuapp.com/student/examPaper?id=${id}`)
+  }
+  //student folder exam paper end
+
 }
