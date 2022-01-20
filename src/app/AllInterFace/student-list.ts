@@ -66,9 +66,33 @@ export interface StudentProfile {
     statusCode: number,
     message: string
 }
-export interface VerifyData{
+export interface VerifyData {
     status: string,
     _id: string,
     name: string,
     email: string,
+}
+export interface AllExamData {
+    _id: string,
+    notes: string[],
+    subjectName: string,
+    email: string,
+    Result: string[]
+}
+export interface AllExamForStudent {
+    data: AllExamData,
+    statusCode: number,
+    userId: string,
+    message: string
+}
+export interface PaperData {
+    options: string[],
+    _id: string,
+    question: string
+}
+
+export interface ExamPaperResponse {
+    data: PaperData[],
+    statusCode: number,
+    message: string
 }

@@ -1,1 +1,17 @@
-<p>exam-paper works!</p>
+<div class="card mt-4" *ngFor="let examPaper of examPapers">
+    <div class="card-header">
+        <h3>{{examPaper.question | titlecase}}</h3>
+    </div>
+    <div class="card-body">
+        <!-- <div *ngFor="let option of examPaper.options"> -->
+        <p class="card-title">(a) {{examPaper.options[0]}}</p>
+        <p class="card-title">(b) {{examPaper.options[1]}}</p>
+        <p class="card-title">(c) {{examPaper.options[2]}}</p>
+        <p class="card-title">(d) {{examPaper.options[3]}}</p>
+        <!-- <input type="radio" name="option" class="card-title">(a) {{examPaper.options[0]}}
+        <input type="radio" name="option" class="card-title">(b) {{examPaper.options[1]}}
+        <input type="radio" name="option" class="card-title">(c) {{examPaper.options[2]}}
+        <input type="radio" name="option" class="card-title">(d) {{examPaper.options[3]}} -->
+        <!-- </div> -->
+    </div>
+</div>

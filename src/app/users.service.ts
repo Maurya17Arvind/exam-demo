@@ -78,4 +78,7 @@ export class UsersService {
   }
   //student folder exam paper end
 
+  public allStudentForExam(): Observable<any> {
+    return this.http.get('https://nodejsexamination.herokuapp.com/student/studentExam')
+  }
 }

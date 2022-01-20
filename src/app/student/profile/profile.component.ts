@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
   public studentId: string = '';
   public studentName: string = '';
   public studentEmail: string = '';
-  public message: string = 'Student Profile Open';
 
 
   constructor(private studentProlfile: UsersService, private toster: ToastrService) { }
@@ -24,14 +23,16 @@ export class ProfileComponent implements OnInit {
     // this.token = localStorage.getItem('token');
     this.studentProlfile.studentProlfile().subscribe({
       next: (res: StudentProfile) => {
-        console.log(`res`, res)
-        setTimeout(() => {
+        // console.log(`res`, res)
+        // setTimeout(() => {
+        // }, 1000)
+        if (res.statusCode == 200) {
           this.studentRole = res.data.role;
           this.studentId = res.data._id;
           this.studentName = res.data.name;
           this.studentEmail = res.data.email;
-          this.toster.success(this.message);
-        }, 1000)
+          this.toster.success(res.message);
+        }
       },
       error: (err) => {
         this.toster.error(err.message);

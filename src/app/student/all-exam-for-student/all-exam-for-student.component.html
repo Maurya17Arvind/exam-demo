@@ -1,0 +1,20 @@
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Notes</th>
+            <th scope="col">SubjectName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let allExamForStudent of allExamForStudents">
+            <td>{{allExamForStudent._id}}</td>
+            <td>{{allExamForStudent.notes}}</td>
+            <td>{{allExamForStudent.subjectName}}</td>
+            <td>{{allExamForStudent.email}}</td>
+            <td><a [routerLink]="['/examPaper/'+allExamForStudent._id]">View Paper</a></td>
+        </tr>
+    </tbody>
+</table>

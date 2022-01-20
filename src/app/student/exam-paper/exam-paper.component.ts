@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ViewExamDetail } from 'src/app/AllInterFace/student-list';
+import { ExamPaperResponse, PaperData } from 'src/app/AllInterFace/student-list';
 import { UsersService } from 'src/app/users.service';
 
 @Component({
@@ -12,15 +12,19 @@ export class ExamPaperComponent implements OnInit {
 
   public id!: string;
   // public viewExamDeatils: ViewExamDetail[] = [];
-
+  public examPapers: PaperData[] = [];
   constructor(private studentPaper: UsersService, private router: ActivatedRoute) {
-    // this.id = this.router.snapshot.params['_id'];
+    this.id = this.router.snapshot.params['_id'];
+
   }
 
   ngOnInit(): void {
     this.studentPaper.getPaper(this.id).subscribe({
-      next: (res) => {
-        console.log(`res paper`, res)
+      next: (res: ExamPaperResponse) => {
+        console.log(`res paper`, res);
+        this.examPapers = res.data;
+        console.log('this.examPaper', this.examPapers);
+
         // console.log(`this.id`, this.id)
       }
     })
