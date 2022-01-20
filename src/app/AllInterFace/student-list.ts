@@ -112,4 +112,8 @@ export interface DeleteExam {
     statusCode: number,
     message: string
 }
+export interface ForgotPassword {
+    email: string
+}
+
 

@@ -92,5 +92,7 @@ export class UsersService {
     return this.http.delete(`https://nodejsexamination.herokuapp.com/dashboard/Teachers/deleteExam?id=${id}`)
   }
 
-  // public 
+  public forgotPassword(myForm: any): Observable<any> {
+    return this.http.post('https://nodejsexamination.herokuapp.com/users/ForgotPassword', myForm)
+  }
 }
