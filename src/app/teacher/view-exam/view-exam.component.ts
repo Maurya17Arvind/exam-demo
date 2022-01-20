@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/users.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { ViewExamData } from 'src/app/AllInterFace/student-list';
+import { DeleteExam, ViewExamData } from 'src/app/AllInterFace/student-list';
 
 @Component({
   selector: 'app-view-exam',
@@ -19,6 +18,7 @@ export class ViewExamComponent implements OnInit {
   public v!: string;
 
   public viewExamLists: ViewExamData[] = []
+  public backButton: boolean = false;
 
   constructor(private userService: UsersService, private router: ActivatedRoute, private route: Router, private toastr: ToastrService) { }
 
@@ -27,9 +27,14 @@ export class ViewExamComponent implements OnInit {
     // console.log(`this.id`, this.id)
     this.userService.viewExam().subscribe({
       next: (res) => {
-        console.log(`viewExam`, res.data)
-        this.viewExamLists = res.data;
-        this.toastr.success(res.message);
+        if (res.statusCode == 200) {
+          console.log(`viewExam`, res.data)
+          this.viewExamLists = res.data;
+          this.backButton = true;
+          this.toastr.success(res.message);
+        } else {
+          this.backButton = false;
+        }
       },
       error: (err) => {
         this.toastr.error(err.message);
@@ -42,12 +47,9 @@ export class ViewExamComponent implements OnInit {
 
   public open(id: string) {
     this.viewExamLists.find((e) => {
-      // console.log(`v`, e)
       if (e._id == id) {
         this.email = e.email;
-        // console.log(`e._id`, e._id)
         this.note = e.notes;
-        // console.log(`this.note`, this.note)
         this.subjectName = e.subjectName;
         this.id = e._id;
         this.v = e.__v;
@@ -55,5 +57,20 @@ export class ViewExamComponent implements OnInit {
     })
   }
 
+  public deletePaper(id: string) {
+    this.userService.deleteExam(this.id).subscribe({
+      next: (res: DeleteExam) => {
+        if (res.statusCode == 200) {
+          this.toastr.success(res.message);
+          console.log('res delete:>> ', res);
+        } else {
+          this.toastr.error(res.message);
+        }
+      },
+      error: (err) => {
+        this.toastr.error(err.message);
+      }
+    })
+  }
 
 }

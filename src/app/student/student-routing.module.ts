@@ -3,14 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllExamForStudentComponent } from './all-exam-for-student/all-exam-for-student.component';
 import { ExamPaperComponent } from './exam-paper/exam-paper.component';
 import { ProfileComponent } from './profile/profile.component';
+import { StudentHomeComponent } from './student-home/student-home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProfileComponent
+    component: StudentHomeComponent
   },
   {
     path: 'student',
+    component: StudentHomeComponent
+  },
+  {
+    path: 'profile',
     component: ProfileComponent
   },
   {
@@ -21,10 +26,6 @@ const routes: Routes = [
     path: 'allExamList',
     component: AllExamForStudentComponent
   },
-  {
-    path: '**',
-    redirectTo: ''
-  }
 
 ];
 

@@ -8,8 +8,8 @@ import { UsersService } from 'src/app/users.service';
 })
 export class HomeTeacherComponent implements OnInit {
 
-  public name: any = '';
-  public email!: any;
+  public name!: string | null;
+  public email!: string | null;
   constructor(private teacherService: UsersService) { }
 
   ngOnInit(): void {

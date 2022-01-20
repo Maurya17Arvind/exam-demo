@@ -78,7 +78,19 @@ export class UsersService {
   }
   //student folder exam paper end
 
+  //student folder all student for exam start
   public allStudentForExam(): Observable<any> {
     return this.http.get('https://nodejsexamination.herokuapp.com/student/studentExam')
   }
+  //student folder all student for exam start
+
+  public editExam(id: string, myForm: any): Observable<any> {
+    return this.http.put(`https://nodejsexamination.herokuapp.com/dashboard/Teachers/editExam?id=${id}`, myForm);
+  }
+
+  public deleteExam(id: string): Observable<any> {
+    return this.http.delete(`https://nodejsexamination.herokuapp.com/dashboard/Teachers/deleteExam?id=${id}`)
+  }
+
+  // public 
 }

@@ -1,0 +1,70 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { EditShowExamResponse, EditViewResponseData } from 'src/app/AllInterFace/student-list';
+import { UsersService } from 'src/app/users.service';
+
+@Component({
+  selector: 'app-edit-exam',
+  templateUrl: './edit-exam.component.html',
+  styleUrls: ['./edit-exam.component.scss']
+})
+export class EditExamComponent implements OnInit {
+
+  public id!: string;
+  public updateButton: boolean = false;
+  public allQuestion: Object = {};
+  public editData = [];
+  public viewExamDeatils: EditViewResponseData[] = [];
+
+
+
+  constructor(private userService: UsersService, private router: ActivatedRoute, private toster: ToastrService) {
+    this.id = this.router.snapshot.params['_id'];
+  }
+
+
+
+  ngOnInit(): void {
+    this.userService.viewExamDeatils(this.id).subscribe({
+      next: (res) => {
+        if (res.statusCode == 200) {
+          this.viewExamDeatils = res.data.questions;
+          this.toster.success(res.message);
+          this.updateButton = true;
+        } else {
+          this.updateButton = false;
+        }
+      },
+      error: (err) => {
+        this.toster.error(err.message);
+      }
+    })
+
+
+  }
+
+  public editExam(): void {
+    this.allQuestion = {
+      subjectName: "Arvind Exam",
+      questions: this.viewExamDeatils,
+      notes: ["10mins exam", "start time 10am"]
+    }
+
+    this.userService.editExam(this.id, this.allQuestion).subscribe({
+      next: (res: EditShowExamResponse) => {
+        if (res.statusCode == 200) {
+          this.toster.success(res.message);
+        } else {
+          this.toster.error(res.message);
+        }
+      },
+      error: (err) => {
+        this.toster.error(err.message);
+      }
+    })
+  }
+
+
+}

@@ -1,13 +1,10 @@
-<button class="btn btn-primary m-2" routerLink="/viewExam" *ngIf="backButton"><i class="fas fa-backward m-2"></i>Go
-    Back</button>
+<button class="btn btn-primary m-3" (click)="editExam()" *ngIf="updateButton">Update Exam</button>
+<button class="btn btn-primary m-3" routerLink="/viewExam" *ngIf="updateButton">Go Back</button>
 <div class="card mt-4" *ngFor="let viewExamDetail of viewExamDeatils">
     <div class="card-header">
         <h3>{{viewExamDetail.question | titlecase}}</h3>
     </div>
     <div class="card-body">
-        <!-- <div *ngFor="let option of viewExamDetail.options">
-            <p class="card-title">{{option}}</p>
-        </div> -->
         <p class="card-title w-50">(a) {{viewExamDetail.options[0]}}</p>
         <p class="card-title w-50">(b) {{viewExamDetail.options[1]}}</p>
         <p class="card-title w-50">(c) {{viewExamDetail.options[2]}}</p>

@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   public studentId: string = '';
   public studentName: string = '';
   public studentEmail: string = '';
-
+  public showProfile: boolean = false;
 
   constructor(private studentProlfile: UsersService, private toster: ToastrService) { }
 
@@ -29,9 +29,12 @@ export class ProfileComponent implements OnInit {
         if (res.statusCode == 200) {
           this.studentRole = res.data.role;
           this.studentId = res.data._id;
+          this.showProfile = true;
           this.studentName = res.data.name;
           this.studentEmail = res.data.email;
           this.toster.success(res.message);
+        } else {
+          this.showProfile = false;
         }
       },
       error: (err) => {

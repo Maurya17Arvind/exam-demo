@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateExamComponent } from './create-exam/create-exam.component';
+import { EditExamComponent } from './edit-exam/edit-exam.component';
 import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
 import { StudentDataListComponent } from './student-data-list/student-data-list.component';
 import { VerifyStudentDataComponent } from './verify-student-data/verify-student-data.component';
@@ -21,10 +22,10 @@ const routes: Routes = [
     path: 'viewDetail/:_id',
     component: ViewStudentDetailsComponent
   },
-  {
-    path: 'viewDetail',
-    component: ViewStudentDetailsComponent
-  },
+  // {
+  //   path: 'viewDetail',
+  //   component: ViewStudentDetailsComponent
+  // },
   {
     path: 'createExam',
     component: CreateExamComponent
@@ -33,10 +34,10 @@ const routes: Routes = [
     path: 'viewExam',
     component: ViewExamComponent
   },
-  // {
-  //   path: 'viewExamDetail',
-  //   component: ViewExamDetailsComponent
-  // },
+  {
+    path: 'viewExamDetail',
+    component: ViewExamDetailsComponent
+  },
   {
     path: 'viewExamDetail/:_id',
     component: ViewExamDetailsComponent
@@ -44,6 +45,10 @@ const routes: Routes = [
   {
     path: 'verifyStudent',
     component: VerifyStudentDataComponent
+  },
+  {
+    path: 'editExam/:_id',
+    component: EditExamComponent
   },
   {
     path: '**',

@@ -19,7 +19,7 @@ export class ViewExamDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.router.snapshot.params['_id'];
-    // console.log(`this.id`, this.id)
+    console.log(`this.id`, this.id)
     this.getExamPaper()
   }
 

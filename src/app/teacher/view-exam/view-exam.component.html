@@ -23,11 +23,16 @@
 </div> -->
 
 <!-- Button trigger modal -->
+<button class="btn btn-primary m-2" routerLink="/teacher" *ngIf="backButton"><i class="fas fa-backward m-2"></i>Go
+    Back</button>
 <div *ngFor="let viewExamList of viewExamLists">
-    <button class="accordion-button" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
-        aria-expanded="true" aria-controls="collapseOne" (click)="open(viewExamList._id)">
-        {{viewExamList.subjectName}}
-    </button>
+    <div class="m-2">
+        <button class="alert alert-success w-100 d-flex justify-content-between" type="button" data-bs-toggle="modal"
+            data-bs-target="#exampleModal" aria-expanded="true" aria-controls="collapseOne"
+            (click)="open(viewExamList._id)">
+            {{viewExamList.subjectName}}<i class="fas fa-eye fs-3"></i>
+        </button>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -44,9 +49,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                        [routerLink]="['/viewExamDetail/'+ id]">View Exam
+                    <a class="btn btn-secondary" data-bs-dismiss="modal" [routerLink]="['/editExam/'+id]">Edit Exam</a>
+                    <button class="btn btn-primary" data-bs-dismiss="modal" [routerLink]="['/viewExamDetail/'+id]">View
+                        Exam
                         Detail</button>
+                    <a class="btn btn-secondary" data-bs-dismiss="modal" (click)="deletePaper(id)">Delete Exam</a>
                 </div>
             </div>
         </div>

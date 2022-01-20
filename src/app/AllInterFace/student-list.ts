@@ -96,3 +96,20 @@ export interface ExamPaperResponse {
     statusCode: number,
     message: string
 }
+
+export interface EditViewResponseData {
+    options: string[],
+    question: string,
+    answer: string
+}
+export interface EditShowExamResponse {
+    data: EditViewResponseData;
+    statusCode: number,
+    message: string
+}
+export interface DeleteExam {
+    data: null;
+    statusCode: number,
+    message: string
+}
+
