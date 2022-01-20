@@ -115,5 +115,10 @@ export interface DeleteExam {
 export interface ForgotPassword {
     email: string
 }
+export interface ForgotPasswordResponse {
+    data: [],
+    message: string,
+    statusCode: number
+}
 
 

@@ -31,14 +31,7 @@ export class SignupComponent implements OnInit {
 
   }
   public onSignUp() {
-    this.usersService.signUpData(this.signUpForm.value
-      // {
-      //   name: this.signUpForm.value.name,
-      //   email: this.signUpForm.value.email,
-      //   password: this.signUpForm.value.password,
-      //   role: this.signUpForm.value.role
-      // }
-    ).subscribe({
+    this.usersService.signUpData(this.signUpForm.value).subscribe({
       next: (res: SignUpResponse) => {
         this.router.navigate(['login']);
         this.toster.success(res.message);
