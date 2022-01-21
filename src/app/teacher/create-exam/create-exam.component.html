@@ -1,40 +1,58 @@
-<div class="d-flex justify-content-center">
+<div>
     <div>
-        <h1 class="mt-5">Add Exam Question From</h1>
+        <h1 class="mt-5 text-center">Add Exam Question From</h1>
     </div>
-    <div>
-        <button type="submit" class="btn btn-primary mt-5" (click)="createExam()">Create Exam</button>
-    </div>
-</div>
-<div class="d-flex justify-content-center">
-    <form class="card w-50" [formGroup]="examForm">
-        <div class="m-3">
-            <label for="exampleInputQuestion" class="form-label">Exam Name</label>
-            <input type="text" name="question" placeholder="Enter Exam Name" class="form-control"
-                id="exampleInputExamName" aria-describedby="emailHelp">
+    <div class="d-flex justify-content-center">
+        <div>
+            <button type="submit" class="btn btn-primary m-5" (click)="createPaper()" *ngIf="createButton">Create
+                Exam</button>
+            <button type="submit" class="btn btn-primary m-5" *ngIf="viewExam" routerLink="/teacher">Go Back
+                Home</button>
+            <button type="submit" class="btn btn-primary m-5" *ngIf="viewExam" routerLink="/viewExam">View
+                ExamList</button>
         </div>
-        <div class="m-3">
-            <label for="exampleInputQuestion" class="form-label">Question</label>
-            <input type="text" name="question" formControlName="question" class="form-control"
-                placeholder="Enter Question" id="exampleInputQuestion" aria-describedby="emailHelp">
-            <label for="exampleInputOption" class="form-label">Option</label>
-            <div class="d-flex justify-content-between flex-wrap">
-                <input type="text" name="option1" placeholder="A" formControlName="option1"
-                    class="form-control w-50 mt-1">
-                <input type="text" name="option2" placeholder="B" formControlName="option2"
-                    class="form-control w-50 mt-1">
-                <input type="text" name="option3" placeholder="C" formControlName="option3"
-                    class="form-control w-50 mt-1">
-                <input type="text" name="option4" placeholder="D" formControlName="option4"
-                    class="form-control w-50 mt-1">
+    </div>
+    <div class="d-flex justify-content-center">
+        <form class="card w-50" [formGroup]="examForm">
+            <div class="m-3">
+                <label for="exampleInputQuestion" class="form-label">Exam Name</label>
+                <input type="text" name="question" formControlName="subjectName" placeholder="Enter Exam Name"
+                    class="form-control" id="exampleInputExamName" aria-describedby="emailHelp">
             </div>
+            <div class="m-3" formArrayName="questions"
+                *ngFor="let paper of examForm.get('questions')['controls']; let i = index;">
+                <div [formGroupName]="i">
+                    <label for="exampleInputQuestion" class="form-label">Question :-{{i+1}}</label>
+                    <input type="text" name="question" formControlName="question" class="form-control"
+                        placeholder="Enter Question" id="exampleInputQuestion" aria-describedby="emailHelp">
+                    <label for="exampleInputQuestion" class="form-label">Answer</label>
+                    <input type="text" name="question" formControlName="answer" class="form-control"
+                        placeholder="Enter Question" id="exampleInputQuestion" aria-describedby="emailHelp">
+                    <label for="exampleInputOption" class="form-label">Option</label>
+                    <div class="d-flex justify-content-between flex-wrap">
+                        <input type="text" name="option1" placeholder="A" class="form-control w-50 mt-1">
+                        <input type="text" name="option2" placeholder="B" class="form-control w-50 mt-1">
+                        <input type="text" name="option3" placeholder="C" class="form-control w-50 mt-1">
+                        <input type="text" name="option4" placeholder="D" class="form-control w-50 mt-1">
+                    </div>
+                </div>
+
+                <div class=" d-flex justify-content-between">
+                    <!-- <button type="submit" class="btn btn-primary mt-3" (click)="addQuestion()">Add Question</button> -->
+                    <button type="button" class="btn btn-danger mt-3" (click)="removeQuestion(i)">Remove
+                        Question</button>
+                    <button type="button" class="btn btn-primary mt-3" (click)="addQuestion()">Add Question</button>
+                </div>
+            </div>
+            <!-- <div class="m-3" formArrayName="notes" *ngFor="let notes of examForm.get('notes')['controls']">
+            <input type="text" placeholder="notes" class="form-control">
         </div>
-        <div class="m-3">
-            <button type="submit" class="btn btn-primary mt-3" (click)="addQuestion()">Add Question</button>
-        </div>
-    </form>
-</div>
-<!-- <div class="card" *ngFor="let question of examQuestions">
+        <div class="mx-3 mb-3">
+            <button type="submit" class="btn btn-primary mt-3" (click)="addNotes()">Add Notes</button>
+        </div> -->
+        </form>
+    </div>
+    <!-- <div class="card" *ngFor="let question of examQuestions">
     <h1>{{question.question}}</h1>
     {{question.option1}}
     {{question.option2}}

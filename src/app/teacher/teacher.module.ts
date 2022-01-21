@@ -11,6 +11,7 @@ import { ViewExamDetailsComponent } from './view-exam-details/view-exam-details.
 import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
 import { VerifyStudentDataComponent } from './verify-student-data/verify-student-data.component';
 import { EditExamComponent } from './edit-exam/edit-exam.component';
+import { FormArrayLearnComponent } from './form-array-learn/form-array-learn.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { EditExamComponent } from './edit-exam/edit-exam.component';
     ViewExamDetailsComponent,
     HomeTeacherComponent,
     VerifyStudentDataComponent,
-    EditExamComponent
+    EditExamComponent,
+    FormArrayLearnComponent
   ],
   imports: [
     CommonModule,

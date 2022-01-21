@@ -16,9 +16,10 @@ export class ForgotPasswordComponent implements OnInit {
   public myForm!: FormGroup;
   constructor(private userService: UsersService, private toster: ToastrService, private fb: FormBuilder) {
     this.myForm = this.fb.group({
-      // email: ['', [Validators.required, Validators.email]]
-      email: ['']
+      email: ['', [Validators.required, Validators.email]]
+      // email: ['']
     })
+    console.log('this.myForm.controls :>> ', this.myForm.controls);
   }
 
   ngOnInit(): void {
@@ -42,7 +43,7 @@ export class ForgotPasswordComponent implements OnInit {
       }
     })
   }
-  // get fControl() {
-  //   return this.myForm.controls;
-  // }
+  get fControl() {
+    return this.myForm.controls;
+  }
 }

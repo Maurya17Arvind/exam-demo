@@ -62,7 +62,6 @@ export class ViewExamComponent implements OnInit {
       next: (res: DeleteExam) => {
         if (res.statusCode == 200) {
           this.toastr.success(res.message);
-          console.log('res delete:>> ', res);
         } else {
           this.toastr.error(res.message);
         }
