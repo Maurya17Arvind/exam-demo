@@ -14,25 +14,34 @@ export class ViewStudentDetailsComponent implements OnInit {
   public _id!: string;
   public name!: string;
   public email!: string;
-  constructor(private router: ActivatedRoute, private usersService: UsersService, private toster: ToastrService) { }
+  public studentData;
+  public studentDataResponse;
+
+  constructor(private activatedRoute: ActivatedRoute, private usersService: UsersService, private toster: ToastrService) {
+    this.studentData = this.activatedRoute.snapshot.data['viewDetail'];
+  }
 
   ngOnInit(): void {
-    this.id = this.router.snapshot.params['_id'];
-    console.log(`this.id`, this.id)
+    this.id = this.activatedRoute.snapshot.params['_id'];
     this.getData();
   }
 
   public getData() {
-    this.usersService.viewData(this.id).subscribe((res) => {
-      // console.log(`view`, res)
-      if (res.statusCode === 200) {
-        this._id = res.data[0]._id;
-        this.name = res.data[0].name;
-        this.email = res.data[0].email;
-        this.toster.success(res.message);
-      } else {
-        this.toster.error(res.message);
-      }
-    })
+    // this.usersService.viewData(this.id).subscribe((res) => {
+    //   // console.log(`view`, res)
+    //   if (res.statusCode === 200) {
+    //     this._id = res.data[0]._id;
+    //     this.name = res.data[0].name;
+    //     this.email = res.data[0].email;
+    //     this.toster.success(res.message);
+    //   } else {
+    //     this.toster.error(res.message);
+    //   }
+    // })
+    if (this.studentData.statusCode == 200) {
+      this._id = this.studentData.data[0]._id;
+      this.name = this.studentData.data[0].name;
+      this.email = this.studentData.data[0].email;
+    }
   }
 }

@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ExamListResolver } from '../Resolver/exam-list.resolver';
+import { StudentListResolver } from '../Resolver/student-list.resolver';
+import { ViewExamDetailResolver } from '../Resolver/view-exam-detail.resolver';
+import { ViewStudentDetailResolver } from '../Resolver/view-student-detail.resolver';
 import { CreateExamComponent } from './create-exam/create-exam.component';
 import { EditExamComponent } from './edit-exam/edit-exam.component';
 import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
@@ -16,11 +20,13 @@ const routes: Routes = [
   },
   {
     path: 'studentList',
-    component: StudentDataListComponent
+    component: StudentDataListComponent,
+    resolve: { studentList: StudentListResolver }
   },
   {
     path: 'viewDetail/:_id',
-    component: ViewStudentDetailsComponent
+    component: ViewStudentDetailsComponent,
+    resolve: { viewDetail: ViewStudentDetailResolver }
   },
   // {
   //   path: 'viewDetail',
@@ -32,15 +38,17 @@ const routes: Routes = [
   },
   {
     path: 'viewExam',
-    component: ViewExamComponent
+    component: ViewExamComponent,
+    resolve: { examList: ExamListResolver }
   },
-  {
-    path: 'viewExamDetail',
-    component: ViewExamDetailsComponent
-  },
+  // {
+  //   path: 'viewExamDetail',
+  //   component: ViewExamDetailsComponent
+  // },
   {
     path: 'viewExamDetail/:_id',
-    component: ViewExamDetailsComponent
+    component: ViewExamDetailsComponent,
+    resolve: { viewExamDetail: ViewExamDetailResolver }
   },
   {
     path: 'verifyStudent',

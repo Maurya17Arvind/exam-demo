@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EditShowExamResponse, EditViewResponseData } from 'src/app/AllInterFace/student-list';
 import { UsersService } from 'src/app/users.service';
@@ -20,8 +20,8 @@ export class EditExamComponent implements OnInit {
 
 
 
-  constructor(private userService: UsersService, private router: ActivatedRoute, private toster: ToastrService) {
-    this.id = this.router.snapshot.params['_id'];
+  constructor(private userService: UsersService, private activatedRoute: ActivatedRoute, private toster: ToastrService, private router: Router) {
+    this.id = this.activatedRoute.snapshot.params['_id'];
   }
 
 
@@ -56,6 +56,7 @@ export class EditExamComponent implements OnInit {
       next: (res: EditShowExamResponse) => {
         if (res.statusCode == 200) {
           this.toster.success(res.message);
+          this.router.navigate(['/viewExam'])
         } else {
           this.toster.error(res.message);
         }
