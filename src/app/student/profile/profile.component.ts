@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StudentProfile } from 'src/app/AllInterFace/student-list';
 import { UsersService } from 'src/app/users.service';
@@ -16,16 +17,15 @@ export class ProfileComponent implements OnInit {
   public studentName: string = '';
   public studentEmail: string = '';
   public showProfile: boolean = false;
+  public newName: string;
+  public updateStudent: object = {};
 
-  constructor(private studentProlfile: UsersService, private toster: ToastrService) { }
+  constructor(private userService: UsersService, private toster: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     // this.token = localStorage.getItem('token');
-    this.studentProlfile.studentProlfile().subscribe({
+    this.userService.studentProlfile().subscribe({
       next: (res: StudentProfile) => {
-        // console.log(`res`, res)
-        // setTimeout(() => {
-        // }, 1000)
         if (res.statusCode == 200) {
           this.studentRole = res.data.role;
           this.studentId = res.data._id;
@@ -41,6 +41,22 @@ export class ProfileComponent implements OnInit {
         this.toster.error(err.message);
       }
     })
+  }
 
+
+  public update() {
+    this.updateStudent = {
+      name: this.newName
+    }
+    this.userService.updateStudent(this.updateStudent).subscribe({
+      next: (res) => {
+        if (res.statusCode == 200) {
+          this.toster.success(res.message);
+        }
+      },
+      error: (err) => {
+        this.toster.error(err.message);
+      }
+    })
   }
 }

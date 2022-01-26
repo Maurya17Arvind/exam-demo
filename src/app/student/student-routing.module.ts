@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllExamResolver } from '../studentResolver/all-exam.resolver';
+import { PaperResolver } from '../studentResolver/paper.resolver';
 import { AllExamForStudentComponent } from './all-exam-for-student/all-exam-for-student.component';
 import { ExamPaperComponent } from './exam-paper/exam-paper.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -20,11 +22,13 @@ const routes: Routes = [
   },
   {
     path: 'examPaper/:_id',
-    component: ExamPaperComponent
+    component: ExamPaperComponent,
+    resolve: { examPaper: PaperResolver}
   },
   {
     path: 'allExamList',
-    component: AllExamForStudentComponent
+    component: AllExamForStudentComponent,
+    resolve: { allExam: AllExamResolver }
   },
 
 ];

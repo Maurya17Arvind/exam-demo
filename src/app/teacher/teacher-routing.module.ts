@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ExamListResolver } from '../Resolver/exam-list.resolver';
 import { StudentListResolver } from '../Resolver/student-list.resolver';
+import { VerifyStudentResolver } from '../Resolver/verify-student.resolver';
 import { ViewExamDetailResolver } from '../Resolver/view-exam-detail.resolver';
 import { ViewStudentDetailResolver } from '../Resolver/view-student-detail.resolver';
 import { CreateExamComponent } from './create-exam/create-exam.component';
@@ -52,7 +53,8 @@ const routes: Routes = [
   },
   {
     path: 'verifyStudent',
-    component: VerifyStudentDataComponent
+    component: VerifyStudentDataComponent,
+    resolve: { verifyStudent: VerifyStudentResolver }
   },
   {
     path: 'editExam/:_id',

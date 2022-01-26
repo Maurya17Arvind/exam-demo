@@ -8,8 +8,31 @@
             <p class="card-text">Id:-{{studentId}}</p>
             <p class="card-text">Email:-{{studentEmail}}</p>
             <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-primary">More About Us<i class="fas fa-arrow-right mx-2"></i></a>
-                <button class="btn btn-primary" routerLink="student">Go Home</button>
+                <button class="btn btn-primary" routerLink="/student">Go Home</button>
+                <button class="btn btn-warning d-flex justify-content-between" type="button" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" aria-expanded="true" aria-controls="collapseOne">Update
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Enter Your Name For Update</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><input type="text" class="form-control" [(ngModel)]="newName" placeholder="Update Your Name"></p>
+                    <h5 class="card-title">Role:-{{studentRole}}</h5>
+                    <p class="card-text">Id:-{{studentId}}</p>
+                    <p class="card-text">Email:-{{studentEmail}}</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-outline-success" data-bs-dismiss="modal" (click)="update()"
+                        routerLink="/profile">Update
+                        Name<i class="fas fa-arrow-right mx-2"></i></a>
+                </div>
             </div>
         </div>
     </div>

@@ -84,15 +84,29 @@ export class UsersService {
   }
   //student folder all student for exam start
 
+  //teacher folder editExam start
   public editExam(id: string, myForm: any): Observable<any> {
     return this.http.put(`https://nodejsexamination.herokuapp.com/dashboard/Teachers/editExam?id=${id}`, myForm);
   }
+  //teacher folder editExam end
 
+  //teacher folder deleteExam start
   public deleteExam(id: string): Observable<any> {
     return this.http.delete(`https://nodejsexamination.herokuapp.com/dashboard/Teachers/deleteExam?id=${id}`)
   }
+  //teacher folder deleteExam start
 
   public forgotPassword(myForm: any): Observable<any> {
     return this.http.post('https://nodejsexamination.herokuapp.com/users/ForgotPassword', myForm)
   }
+
+  public giveExam(id: string, myForm: any): Observable<any> {
+    return this.http.post(`https://nodejsexamination.herokuapp.com/student/giveExam?id=${id}`, myForm)
+  }
+
+  //student folder update student name start 
+  public updateStudent(name): Observable<any> {
+    return this.http.put('https://nodejsexamination.herokuapp.com/student/studentProfile', name)
+  }
+  //student folder update student name start
 }

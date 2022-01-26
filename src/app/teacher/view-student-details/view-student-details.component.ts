@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Result } from 'src/app/AllInterFace/student-list';
 import { UsersService } from 'src/app/users.service';
 
 @Component({
@@ -15,7 +16,12 @@ export class ViewStudentDetailsComponent implements OnInit {
   public name!: string;
   public email!: string;
   public studentData;
+  public resultTable: boolean = false;
   public studentDataResponse;
+  public studentResults: Result[] = [];
+  public noExam: boolean = false;
+  public viewExam: boolean = true;
+  public hideExam: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private usersService: UsersService, private toster: ToastrService) {
     this.studentData = this.activatedRoute.snapshot.data['viewDetail'];
@@ -43,5 +49,21 @@ export class ViewStudentDetailsComponent implements OnInit {
       this.name = this.studentData.data[0].name;
       this.email = this.studentData.data[0].email;
     }
+  }
+  public result() {
+    if (this.studentData.data[0].Result.length > 0) {
+      this.studentResults = this.studentData.data[0].Result;
+      this.resultTable = true;
+      this.viewExam = false;
+      this.hideExam = true;
+    } else {
+      this.noExam = true;
+    }
+  }
+
+  public hideResult() {
+    this.resultTable = false;
+    this.viewExam = true;
+    this.hideExam = false;
   }
 }

@@ -72,6 +72,11 @@ export interface VerifyData {
     name: string,
     email: string,
 }
+export interface VerifyDataResponse {
+    data: VerifyData[],
+    message: string,
+    statusCode: number
+}
 export interface AllExamData {
     _id: string,
     notes: string[],
@@ -80,7 +85,7 @@ export interface AllExamData {
     Result: string[]
 }
 export interface AllExamForStudent {
-    data: AllExamData,
+    data: AllExamData[],
     statusCode: number,
     userId: string,
     message: string
@@ -122,3 +127,13 @@ export interface ForgotPasswordResponse {
 }
 
 
+//teacher folder view student details result 
+export interface Result {
+    _id: string,
+    rank: number,
+    subjectName: string,
+    score: number,
+    studentId: string,
+    resultStatus: string,
+    __v: number
+}

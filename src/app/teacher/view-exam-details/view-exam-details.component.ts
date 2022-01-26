@@ -24,10 +24,6 @@ export class ViewExamDetailsComponent implements OnInit {
   ngOnInit(): void {
     // this.id = this.activatedRoute.snapshot.params['_id'];
     this.getExamPaper();
-    // this.spinner.show();
-    // setTimeout(() => {
-    //   this.spinner.hide();
-    // }, 3000)
   }
 
   public getExamPaper() {

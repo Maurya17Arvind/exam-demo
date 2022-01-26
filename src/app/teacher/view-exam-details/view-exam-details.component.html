@@ -1,5 +1,7 @@
-<button class="btn btn-primary m-2" routerLink="/viewExam" *ngIf="backButton"><i class="fas fa-backward m-2"></i>Go
-    Back</button>
+<div class="d-flex justify-content-end">
+    <button class="btn btn-primary m-2" routerLink="/viewExam" *ngIf="backButton"><i class="fas fa-backward m-2"></i>Go
+        Back</button>
+</div>
 <div class="card mt-4" *ngFor="let viewExamDetail of viewExamDeatils">
     <div class="card-header">
         <h3>{{viewExamDetail.question | titlecase}}</h3>
