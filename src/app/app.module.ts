@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { JwtInterceptor } from './interceptor/jwt.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AuthGuard } from './Authguard/auth.guard';
+import { AuthService } from './Authguard/auth.service';
 
 
 @NgModule({
@@ -34,7 +36,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxSpinnerModule
   ],
 
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

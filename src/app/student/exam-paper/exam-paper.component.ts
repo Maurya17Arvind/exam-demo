@@ -17,12 +17,11 @@ export class ExamPaperComponent implements OnInit {
   // public viewExamDeatils: ViewExamDetail[] = [];
   public submitButton: boolean = false;
   public examPapers: PaperData[] = [];
-  public paper;
+  public paper: ExamPaperResponse;
 
   constructor(private userService: UsersService, private activatedRoute: ActivatedRoute, private toster: ToastrService, private formBuilder: FormBuilder) {
     this.id = this.activatedRoute.snapshot.params['_id'];
     this.paper = this.activatedRoute.snapshot.data['examPaper'];
-
     // this.myForm = this.formBuilder.group({
     //   questions: '',
     //   answer: ''

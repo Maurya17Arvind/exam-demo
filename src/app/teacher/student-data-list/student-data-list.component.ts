@@ -3,6 +3,7 @@ import { UsersService } from 'src/app/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { StudentList, StudentListResponse } from 'src/app/AllInterFace/student-list';
 import { ActivatedRoute } from '@angular/router';
+import { canComponentDeactivate } from 'src/app/Authguard/auth.guard';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './student-data-list.component.html',
   styleUrls: ['./student-data-list.component.scss']
 })
-export class StudentDataListComponent implements OnInit {
+export class StudentDataListComponent implements OnInit, canComponentDeactivate {
 
   public studentsList: StudentList[] = [];
   public backButton: boolean = false;
@@ -18,6 +19,9 @@ export class StudentDataListComponent implements OnInit {
 
   constructor(private userService: UsersService, private toster: ToastrService, private activatedRoute: ActivatedRoute) {
     this.resData = this.activatedRoute.snapshot.data['studentList'];
+  }
+  confirm(): boolean {
+    return window.confirm('Tussi ja rhe ho?');
   }
 
   ngOnInit(): void {

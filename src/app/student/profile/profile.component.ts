@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { StudentProfile } from 'src/app/AllInterFace/student-list';
+import { StudentProfile, StudentProfileData, updateStudentName } from 'src/app/AllInterFace/student-list';
 import { UsersService } from 'src/app/users.service';
 
 @Component({
@@ -11,27 +12,26 @@ import { UsersService } from 'src/app/users.service';
 })
 export class ProfileComponent implements OnInit {
 
-  public token: any;
-  public studentRole: string = '';
-  public studentId: string = '';
-  public studentName: string = '';
-  public studentEmail: string = '';
+  public myForm!: FormGroup;
   public showProfile: boolean = false;
+  public studentProfile: StudentProfileData;
   public newName: string;
-  public updateStudent: object = {};
+  // public updateStudent: object = {};
 
-  constructor(private userService: UsersService, private toster: ToastrService, private router: Router) { }
+  constructor(private userService: UsersService, private toster: ToastrService, private router: Router, private formBuilder: FormBuilder) {
+    this.myForm = this.formBuilder.group({
+      name: ''
+    })
+  }
 
   ngOnInit(): void {
     // this.token = localStorage.getItem('token');
     this.userService.studentProlfile().subscribe({
       next: (res: StudentProfile) => {
         if (res.statusCode == 200) {
-          this.studentRole = res.data.role;
-          this.studentId = res.data._id;
           this.showProfile = true;
-          this.studentName = res.data.name;
-          this.studentEmail = res.data.email;
+          this.studentProfile = res.data;
+          console.log('this.studentProfile :>> ', this.studentProfile);
           this.toster.success(res.message);
         } else {
           this.showProfile = false;
@@ -44,12 +44,13 @@ export class ProfileComponent implements OnInit {
   }
 
 
+  //update student/user name start
   public update() {
-    this.updateStudent = {
-      name: this.newName
-    }
-    this.userService.updateStudent(this.updateStudent).subscribe({
-      next: (res) => {
+    // this.updateStudent = {
+    //   name: this.newName
+    // }
+    this.userService.updateStudent(this.myForm.value).subscribe({
+      next: (res: updateStudentName) => {
         if (res.statusCode == 200) {
           this.toster.success(res.message);
         }
@@ -59,4 +60,6 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
+  //update student name end
+
 }

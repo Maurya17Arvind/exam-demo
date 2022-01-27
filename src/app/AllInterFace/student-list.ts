@@ -137,3 +137,16 @@ export interface Result {
     resultStatus: string,
     __v: number
 }
+
+
+export interface updateStudentNameData {
+    email: '',
+    name: '',
+    id: ''
+}
+
+export interface updateStudentName {
+    data: updateStudentNameData[],
+    message: string,
+    statusCode: number
+}

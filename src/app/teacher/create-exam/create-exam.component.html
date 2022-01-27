@@ -5,9 +5,8 @@
     <div class="d-flex justify-content-center">
         <div>
             <button type="submit" class="btn btn-primary m-5" (click)="createPaper()"
-                [disabled]="examForm.controls['subjectName'].invalid">Create
-                Exam</button>
-            <button type="submit" class="btn btn-primary m-5" *ngIf="viewExam" routerLink="/teacher">Go Back
+                [disabled]="examForm.controls['subjectName'].invalid">Create Exam</button>
+            <button type="submit" class="btn btn-danger m-5" routerLink="/teacher">Go Back
                 Home</button>
             <button type="submit" class="btn btn-primary m-5" *ngIf="viewExam" routerLink="/viewExam">View
                 ExamList</button>

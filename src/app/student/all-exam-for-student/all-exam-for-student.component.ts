@@ -14,7 +14,7 @@ export class AllExamForStudentComponent implements OnInit {
   public allExamForStudents: AllExamData[] = []
   public showTable: boolean = false;
   public backButton: boolean = false;
-  public examForStudent;
+  public examForStudent: AllExamForStudent;
 
   constructor(private userService: UsersService, private toster: ToastrService, private activatedRoute: ActivatedRoute) {
     this.examForStudent = this.activatedRoute.snapshot.data['allExam'];
