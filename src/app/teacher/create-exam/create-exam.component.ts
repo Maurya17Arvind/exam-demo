@@ -15,6 +15,7 @@ export class CreateExamComponent implements OnInit {
   public examForm!: FormGroup;
   public questions!: FormArray;
   public notes!: FormArray;
+  public createExamButton: boolean = false;
   public viewExam: boolean = false;
 
   constructor(private userService: UsersService, private formBuilder: FormBuilder, private router: Router, private toster: ToastrService) {
@@ -62,15 +63,13 @@ export class CreateExamComponent implements OnInit {
     });
   }
 
-  // public notesData(): FormGroup {
-  //   return this.formBuilder.group({
-
-  //   })
-  // }
 
   public addQuestion() {
     this.questions = this.examForm.get('questions') as FormArray;
     this.questions.push(this.createExam());
+    if (this.questions.length == 15) {
+      this.createExamButton = true;
+    }
   }
 
   public removeQuestion(i: number) {

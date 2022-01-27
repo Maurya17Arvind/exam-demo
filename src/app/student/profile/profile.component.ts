@@ -26,12 +26,30 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     // this.token = localStorage.getItem('token');
+    // this.userService.studentProlfile().subscribe({
+    //   next: (res: StudentProfile) => {
+    //     if (res.statusCode == 200) {
+    //       this.showProfile = true;
+    //       this.studentProfile = res.data;
+    //       this.toster.success(res.message);
+    //     } else {
+    //       this.showProfile = false;
+    //     }
+    //   },
+    //   error: (err) => {
+    //     this.toster.error(err.message);
+    //   }
+    // })
+    this.getProfile();
+
+  }
+
+  public getProfile() {
     this.userService.studentProlfile().subscribe({
       next: (res: StudentProfile) => {
         if (res.statusCode == 200) {
           this.showProfile = true;
           this.studentProfile = res.data;
-          console.log('this.studentProfile :>> ', this.studentProfile);
           this.toster.success(res.message);
         } else {
           this.showProfile = false;
@@ -42,7 +60,6 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
-
 
   //update student/user name start
   public update() {

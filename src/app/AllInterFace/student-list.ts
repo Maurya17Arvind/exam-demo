@@ -66,6 +66,7 @@ export interface VerifyData {
     email: string,
 }
 export interface VerifyDataResponse {
+    count: number,
     data: VerifyData[],
     message: string,
     statusCode: number
@@ -172,14 +173,14 @@ export interface ViewExamResponses {
     message: string,
     statusCode: number
 }
-//view exam list interface end
 
+//view exam list interface end
 //view exam details interface start
-export interface ExamDetailsQuestions {
-    options: string[],
-    question: string,
-    answer: string
-}
+// export interface ExamDetailsQuestions {
+//     options: string[],
+//     question: string,
+//     answer: string
+// }
 // export interface ExamDetailsData {
 //     data: ExamDetailsQuestions[]
 // }
@@ -201,6 +202,7 @@ export interface Result {
     __v: number
 }
 //teacher folder view student details result end
+
 //view student details interface start
 export interface StudentDetailsData {
     _id: string,
@@ -213,3 +215,4 @@ export interface StudentDetailsResponse {
     message: string,
     statusCode: number
 }
+//view student details interface end

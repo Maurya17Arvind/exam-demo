@@ -2,21 +2,24 @@
     <button class="btn btn-primary" *ngIf="backButton" routerLink="/teacher"><i class="fas fa-backward m-2"></i>Go
         Back</button>
 </div>
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Status</th>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let verifyData of verifyDatas">
-            <td>{{verifyData.status}}</td>
-            <td>{{verifyData._id}}</td>
-            <td>{{verifyData.name}}</td>
-            <td>{{verifyData.email}}</td>
-        </tr>
-    </tbody>
-</table>
+<h3>Total Verifyed Student:- {{verifyStudentLength}}</h3>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Status</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let verifyData of verifyDatas">
+                <td>{{verifyData.status}}</td>
+                <td>{{verifyData._id}}</td>
+                <td>{{verifyData.name}}</td>
+                <td>{{verifyData.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

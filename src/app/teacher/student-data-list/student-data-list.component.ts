@@ -13,15 +13,16 @@ import { canComponentDeactivate } from 'src/app/Authguard/auth.guard';
 })
 export class StudentDataListComponent implements OnInit, canComponentDeactivate {
 
-  public studentsList: StudentList[] = [];
+  public studentsList: StudentList[];
   public backButton: boolean = false;
   public resData: StudentListResponse;
+  public totalStudent: number;
 
   constructor(private userService: UsersService, private toster: ToastrService, private activatedRoute: ActivatedRoute) {
     this.resData = this.activatedRoute.snapshot.data['studentList'];
   }
   confirm(): boolean {
-    return window.confirm('Tussi ja rhe ho?');
+    return window.confirm('Are you sure you want to navigate to anyother page');
   }
 
   ngOnInit(): void {
@@ -41,6 +42,7 @@ export class StudentDataListComponent implements OnInit, canComponentDeactivate 
     //   }
     // })
     if (this.resData.statusCode == 200) {
+      this.totalStudent = this.resData.count;
       this.studentsList = this.resData.data;
       this.toster.success(this.resData.message);
       this.backButton = true;
