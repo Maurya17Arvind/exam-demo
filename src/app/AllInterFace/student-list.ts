@@ -41,13 +41,6 @@ export interface LoginResponse {
     message: string,
     statusCode: number
 }
-export interface ViewExamData {
-    email: string,
-    notes: string[],
-    subjectName: string,
-    _id: string,
-    __v: string
-}
 export interface ViewExamDetail {
     options: string[],
     questions: string[],
@@ -102,6 +95,7 @@ export interface ExamPaperResponse {
     message: string
 }
 
+//Edit exam interface start
 export interface EditViewResponseData {
     options: string[],
     question: string,
@@ -112,11 +106,15 @@ export interface EditShowExamResponse {
     statusCode: number,
     message: string
 }
+//Edit exam interface start
+
 export interface DeleteExam {
     data: null;
     statusCode: number,
     message: string
 }
+
+//forgot-password interface start
 export interface ForgotPassword {
     email: string
 }
@@ -125,9 +123,74 @@ export interface ForgotPasswordResponse {
     message: string,
     statusCode: number
 }
+//forgot-password interface end
 
 
-//teacher folder view student details result 
+//Update student profile interface start
+export interface UpdateStudentNameData {
+    email: string,
+    name: string,
+    id: string
+}
+export interface UpdateStudentName {
+    data: UpdateStudentNameData[],
+    message: string,
+    statusCode: number
+}
+//Update student profile interface end
+
+//Create Exam All InterFace stars
+export interface CreateExamQuestions {
+    options: string[],
+    _id: string,
+    question: string
+}
+export interface CreateExamData {
+    questions: CreateExamQuestions[],
+    email: string,
+    notes: string[],
+}
+
+export interface CreateExamResponses {
+    data: CreateExamData[],
+    message: string,
+    statusCode: number
+}
+//Create Exam All InterFace end
+
+
+//view exam list interface start
+export interface ViewExamData {
+    email: string,
+    notes: string[],
+    subjectName: string,
+    _id: string,
+    __v: string
+}
+export interface ViewExamResponses {
+    data: ViewExamData[],
+    message: string,
+    statusCode: number
+}
+//view exam list interface end
+
+//view exam details interface start
+export interface ExamDetailsQuestions {
+    options: string[],
+    question: string,
+    answer: string
+}
+// export interface ExamDetailsData {
+//     data: ExamDetailsQuestions[]
+// }
+// export interface ExamDetailsResponse {
+//     message: string,
+//     statusCode: number,
+//     data: ViewExamDetail[]
+// }
+//view exam details interface end
+
+//teacher folder view student details result start
 export interface Result {
     _id: string,
     rank: number,
@@ -137,16 +200,16 @@ export interface Result {
     resultStatus: string,
     __v: number
 }
-
-
-export interface updateStudentNameData {
-    email: '',
-    name: '',
-    id: ''
+//teacher folder view student details result end
+//view student details interface start
+export interface StudentDetailsData {
+    _id: string,
+    name: string,
+    email: string,
+    Result: Result[]
 }
-
-export interface updateStudentName {
-    data: updateStudentNameData[],
+export interface StudentDetailsResponse {
+    data: StudentDetailsData[],
     message: string,
     statusCode: number
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { StudentProfile, StudentProfileData, updateStudentName } from 'src/app/AllInterFace/student-list';
+import { StudentProfile, StudentProfileData, UpdateStudentName } from 'src/app/AllInterFace/student-list';
 import { UsersService } from 'src/app/users.service';
 
 @Component({
@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
     //   name: this.newName
     // }
     this.userService.updateStudent(this.myForm.value).subscribe({
-      next: (res: updateStudentName) => {
+      next: (res: UpdateStudentName) => {
         if (res.statusCode == 200) {
           this.toster.success(res.message);
         }

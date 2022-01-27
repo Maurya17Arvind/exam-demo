@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/users.service';
-import { DeleteExam, ViewExamData } from 'src/app/AllInterFace/student-list';
+import { DeleteExam, ViewExamData, ViewExamResponses } from 'src/app/AllInterFace/student-list';
 
 @Component({
   selector: 'app-view-exam',
@@ -12,13 +12,13 @@ import { DeleteExam, ViewExamData } from 'src/app/AllInterFace/student-list';
 export class ViewExamComponent implements OnInit {
 
   public email!: string;
-  public note: string[] = [];
+  public note: string[];
   public subjectName!: string;
   public id!: string;
   public v!: string;
-  public viewExamLists: ViewExamData[] = []
+  public viewExamLists: ViewExamData[];
   public backButton: boolean = false;
-  public viewExamResponses;
+  public viewExamResponses: ViewExamResponses;
 
   constructor(private userService: UsersService, private activatedRoute: ActivatedRoute, private route: Router, private toastr: ToastrService) {
     this.viewExamResponses = this.activatedRoute.snapshot.data['examList'];

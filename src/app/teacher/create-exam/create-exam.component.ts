@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CreateExamResponses } from 'src/app/AllInterFace/student-list';
 import { UsersService } from 'src/app/users.service';
 
 @Component({
@@ -33,7 +34,7 @@ export class CreateExamComponent implements OnInit {
 
   public createPaper() {
     this.userService.createExam(this.examForm.value).subscribe({
-      next: (res) => {
+      next: (res: CreateExamResponses) => {
         if (res.statusCode == 200) {
           console.log('exam  :>> ', res);
           this.toster.success(res.message);

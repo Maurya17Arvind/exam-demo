@@ -35,7 +35,6 @@ export class SignupComponent implements OnInit {
       next: (res: SignUpResponse) => {
         this.router.navigate(['login']);
         this.toster.success(res.message);
-        console.warn('signup', res)
       },
       error: (err) => {
         this.errorMessage = true;

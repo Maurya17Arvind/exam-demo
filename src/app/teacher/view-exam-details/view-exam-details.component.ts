@@ -13,7 +13,7 @@ import { UsersService } from 'src/app/users.service';
 export class ViewExamDetailsComponent implements OnInit {
 
   public id!: string;
-  public viewExamDeatils: ViewExamDetail[] = [];
+  public viewExamDeatils: ViewExamDetail[];
   public backButton: boolean = false;
   public examQuestion;
 
@@ -27,7 +27,6 @@ export class ViewExamDetailsComponent implements OnInit {
   }
 
   public getExamPaper() {
-
     if (this.examQuestion.statusCode == 200) {
       this.backButton = true;
       this.viewExamDeatils = this.examQuestion.data.questions;

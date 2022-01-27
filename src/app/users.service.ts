@@ -64,7 +64,7 @@ export class UsersService {
   public viewExamDeatils(id: string): Observable<any> {
     return this.http.get(`https://nodejsexamination.herokuapp.com/dashboard/Teachers/examDetail?id=${id}`)
   }
-  //teacher folder get exam paper start
+  //teacher folder get exam paper end
 
   //teacher folder verify student start
   public verifyStudentData(): Observable<any> {
@@ -82,7 +82,7 @@ export class UsersService {
   public allStudentForExam(): Observable<any> {
     return this.http.get('https://nodejsexamination.herokuapp.com/student/studentExam')
   }
-  //student folder all student for exam start
+  //student folder all student for exam end
 
   //teacher folder editExam start
   public editExam(id: string, myForm: any): Observable<any> {
@@ -94,7 +94,7 @@ export class UsersService {
   public deleteExam(id: string): Observable<any> {
     return this.http.delete(`https://nodejsexamination.herokuapp.com/dashboard/Teachers/deleteExam?id=${id}`)
   }
-  //teacher folder deleteExam start
+  //teacher folder deleteExam end
 
   public forgotPassword(myForm: any): Observable<any> {
     return this.http.post('https://nodejsexamination.herokuapp.com/users/ForgotPassword', myForm)
@@ -108,5 +108,13 @@ export class UsersService {
   public updateStudent(name): Observable<any> {
     return this.http.put('https://nodejsexamination.herokuapp.com/student/studentProfile', name)
   }
-  //student folder update student name start
+  //student folder update student name end
+
+  //chnage password Start
+  public changePassword(token: string, changeForm: any): Observable<any> {
+    //chnage password Start
+    return this.http.post(`https://nodejsexamination.herokuapp.com/users/ForgotPassword/Verify?token=${token}`, changeForm)
+  }
+  //chnage password Start
+
 }

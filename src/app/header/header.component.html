@@ -20,6 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link custom-pointer" (click)="clearToken()" *ngIf="isLogin">LogOut</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/changePassword" *ngIf="isLogin">Change Password</a>
+                </li>
             </ul>
         </div>
     </div>

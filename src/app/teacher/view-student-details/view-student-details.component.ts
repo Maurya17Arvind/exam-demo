@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Result } from 'src/app/AllInterFace/student-list';
+import { Result, StudentDetailsResponse } from 'src/app/AllInterFace/student-list';
 import { UsersService } from 'src/app/users.service';
 
 @Component({
@@ -15,9 +15,8 @@ export class ViewStudentDetailsComponent implements OnInit {
   public _id!: string;
   public name!: string;
   public email!: string;
-  public studentData;
+  public studentData: StudentDetailsResponse;
   public resultTable: boolean = false;
-  public studentDataResponse;
   public studentResults: Result[] = [];
   public noExam: boolean = false;
   public viewExam: boolean = true;

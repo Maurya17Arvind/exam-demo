@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         }
         else {
           localStorage.setItem('token', res.data.token)
-          this.toster.success(res.message);
+          this.toster.error(res.message);
           localStorage.setItem('name', res.data.name)
           this.router.navigate(['student'])
         }
