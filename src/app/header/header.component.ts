@@ -19,12 +19,15 @@ export class HeaderComponent implements OnInit {
     } else {
       this.isLogin = false;
     }
-
-    this.name = localStorage.getItem('name')
+    if (localStorage.getItem('teacherRole')) {
+      this.name = localStorage.getItem('teacherName')
+    } else {
+      this.name = localStorage.getItem('studentName')
+    }
   }
 
   public clearToken() {
-    localStorage.removeItem("token");
+    localStorage.clear();
     this.isLogin = false;
     this.router.navigate(['/login']);
   }

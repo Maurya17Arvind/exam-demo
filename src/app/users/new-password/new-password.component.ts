@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/users.service';
 
@@ -12,7 +13,7 @@ export class NewPasswordComponent implements OnInit {
 
   public resetPasswordForm!: FormGroup;
 
-  constructor(private userService: UsersService, private formBuilder: FormBuilder, private toster: ToastrService) {
+  constructor(private userService: UsersService, private formBuilder: FormBuilder, private toster: ToastrService, private router: Router) {
     this.resetPasswordForm = this.formBuilder.group({
       oldPassword: ['', [Validators.required]],
       Password: ['', [Validators.required, Validators.minLength(6)]],
@@ -27,7 +28,11 @@ export class NewPasswordComponent implements OnInit {
   public onResetPassword() {
     this.userService.resetPassword(this.resetPasswordForm.value).subscribe({
       next: (res) => {
-        this.toster.success(res.message);
+        if (res.statusCode == 200) {
+          this.toster.success(res.message);
+        } else {
+          this.toster.error(res.message);
+        }
       },
       error: (err) => {
         this.toster.error(err.message);
@@ -35,6 +40,14 @@ export class NewPasswordComponent implements OnInit {
     })
   }
 
+
+  public goBack() {
+    if (localStorage.getItem('teacherRole')) {
+      this.router.navigate(['/teacher']);
+    } else {
+      this.router.navigate(['/student']);
+    }
+  }
   get fControl() {
     return this.resetPasswordForm.controls;
   }

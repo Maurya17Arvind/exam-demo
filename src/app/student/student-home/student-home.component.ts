@@ -12,8 +12,8 @@ export class StudentHomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.name = localStorage.getItem('name')
-    this.email = localStorage.getItem('email')
+    this.name = localStorage.getItem('studentName')
+    this.email = localStorage.getItem('studentEmail')
   }
 
 }

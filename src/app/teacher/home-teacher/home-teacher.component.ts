@@ -13,8 +13,8 @@ export class HomeTeacherComponent implements OnInit {
   constructor(private teacherService: UsersService) { }
 
   ngOnInit(): void {
-    this.name = localStorage.getItem('name');
-    this.email = localStorage.getItem('email');
+    this.name = localStorage.getItem('teacherName');
+    this.email = localStorage.getItem('teacherEmail');
     // this.teacherService.loginData().subscribe()
   }
 

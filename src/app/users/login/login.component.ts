@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private usersService: UsersService, private formBuilder: FormBuilder, private toster: ToastrService, private router: Router) {
     this.loginForm = this.formBuilder.group({
       email: ['arvind.tagline@gmail.com', [Validators.required, Validators.email]],
-      password: ['Arvind@', [Validators.required, Validators.minLength(6)]],
+      password: ['123456', [Validators.required, Validators.minLength(6)]],
     })
   }
 
@@ -28,21 +28,24 @@ export class LoginComponent implements OnInit {
   public onLogin() {
     this.usersService.loginData(this.loginForm.value).subscribe({
       next: (res: LoginResponse) => {
-        console.log('login', res);
-        if (res.data.role === 'teacher') {
-          console.log(`res.data`, res.data);
-          localStorage.setItem('token', res.data.token)
-          localStorage.setItem('name', res.data.name)
-          localStorage.setItem('email', res.data.email)
-          // console.log(`res.data.name`, res.data.name)
-          this.toster.success(res.message);
-          this.router.navigate(['teacher'])
-        }
-        else {
-          localStorage.setItem('token', res.data.token)
+        if (res.statusCode == 200) {
+          if (res.data.role === 'teacher') {
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('teacherName', res.data.name);
+            localStorage.setItem('teacherRole', res.data.role);
+            localStorage.setItem('teacherEmail', res.data.email);
+            this.toster.success(res.message);
+            this.router.navigate(['teacher']);
+          }
+          else {
+            localStorage.setItem('token', res.data.token)
+            this.toster.success(res.message);
+            localStorage.setItem('studentName', res.data.name)
+            localStorage.setItem('studentEmail', res.data.email)
+            this.router.navigate(['student'])
+          }
+        } else {
           this.toster.error(res.message);
-          localStorage.setItem('name', res.data.name)
-          this.router.navigate(['student'])
         }
       },
       error: (err) => {
