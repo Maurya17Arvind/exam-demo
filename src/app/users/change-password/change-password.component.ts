@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/users.service';
 
@@ -16,12 +16,17 @@ export class ChangePasswordComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private userService: UsersService, private toster: ToastrService) {
     this.token = localStorage.getItem('token');
     this.changeForm = this.formBuilder.group({
-      Password: '',
-      ConfirmPassword: ''
+      Password: ['', [Validators.required, Validators.minLength(6)]],
+      ConfirmPassword: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
 
   ngOnInit(): void {
+    this.userService.tokenCheckPassword().subscribe({
+      next: (res) => {
+        console.log('res :>> ', res);
+      }
+    })
   }
 
 
@@ -39,5 +44,8 @@ export class ChangePasswordComponent implements OnInit {
         this.toster.error(err.message);
       }
     })
+  }
+  get fControl() {
+    return this.changeForm.controls;
   }
 }

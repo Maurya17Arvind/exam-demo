@@ -12,14 +12,12 @@ import { UsersService } from 'src/app/users.service';
 export class ForgotPasswordComponent implements OnInit {
 
   public emailInuput!: ForgotPassword;
-  // public myForm!: string;
+  public errorMessage: boolean = false;
   public myForm!: FormGroup;
   constructor(private userService: UsersService, private toster: ToastrService, private fb: FormBuilder) {
     this.myForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
-      // email: ['']
     })
-    console.log('this.myForm.controls :>> ', this.myForm.controls);
   }
 
   ngOnInit(): void {
@@ -39,6 +37,7 @@ export class ForgotPasswordComponent implements OnInit {
         }
       },
       error: (err) => {
+        this.errorMessage = true;
         this.toster.error(err.message);
       }
     })

@@ -111,10 +111,19 @@ export class UsersService {
   //student folder update student name end
 
   //chnage password Start
+  public tokenCheckPassword(): Observable<any> {
+    return this.http.get('https://nodejsexamination.herokuapp.com/users/newPassword')
+  }
+
   public changePassword(token: string, changeForm: any): Observable<any> {
-    //chnage password Start
     return this.http.post(`https://nodejsexamination.herokuapp.com/users/ForgotPassword/Verify?token=${token}`, changeForm)
   }
-  //chnage password Start
+  //chnage password end
 
+
+  //resetPassword Start
+  public resetPassword(newPasswordForm: any): Observable<any> {
+    return this.http.post(`https://nodejsexamination.herokuapp.com/users/ResetPassword`, newPasswordForm)
+  }
+  //reset Password end
 }
