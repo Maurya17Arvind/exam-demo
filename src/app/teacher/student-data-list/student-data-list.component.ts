@@ -12,6 +12,8 @@ import { canComponentDeactivate } from 'src/app/Authguard/auth.guard';
   styleUrls: ['./student-data-list.component.scss']
 })
 export class StudentDataListComponent implements OnInit, canComponentDeactivate {
+  public p: Number = 1;
+  public count: Number = 15;
 
   public studentsList: StudentList[];
   public backButton: boolean = false;
@@ -26,21 +28,6 @@ export class StudentDataListComponent implements OnInit, canComponentDeactivate 
   }
 
   ngOnInit(): void {
-    // this.userService.getData().subscribe({
-    //   next: (res: StudentListResponse) => {
-    //     if (res.statusCode == 200) {
-    //       console.log(`res`, res);
-    //       this.studentsList = res.data;
-    //       this.toster.success(res.message);
-    //       this.backButton = true;
-    //     } else {
-    //       this.toster.error(res.message);
-    //     }
-    //   },
-    //   error: (err) => {
-    //     this.toster.error(err.message);
-    //   }
-    // })
     if (this.resData.statusCode == 200) {
       this.totalStudent = this.resData.count;
       this.studentsList = this.resData.data;

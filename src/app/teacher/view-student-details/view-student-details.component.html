@@ -1,20 +1,5 @@
-<!-- <table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{_id}}</td>
-            <td>{{name}}</td>
-            <td>{{email}}</td>
-        </tr>
-    </tbody>
-</table> -->
 <div class="row m-3">
+    <!-- Student Profile start -->
     <div class="col-sm-4">
         <div class="d-flex flex-wrap justify-content-center">
             <div class="card m-3">
@@ -31,8 +16,11 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-8">
-        <table class="table table-responsive table-hover table-success" *ngIf="resultTable">
+    <!-- Student Profile end -->
+
+    <!-- Student Result start -->
+    <div class="col-sm-8 table-responsive">
+        <table class="table table-responsive table-hover table-secondary" *ngIf="resultTable">
             <thead>
                 <tr class="text-center">
                     <th scope="col">Id</th>
@@ -41,16 +29,21 @@
                     <th scope="col">Score</th>
                     <th scope="col">StudentID</th>
                     <th scope="col">ResultStatus</th>
+                    <th scope="col">Student Answer</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let studentResult of studentResults">
+                <tr *ngFor="let studentResult of studentResults; let i= index;"
+                    [ngClass]="{'table-success':studentResult.score>=5,'table-danger':studentResult.score<5}">
                     <td>{{studentResult._id}}</td>
                     <td>{{studentResult.rank}}</td>
                     <td>{{studentResult.subjectName}}</td>
                     <td>{{studentResult.score}}</td>
                     <td>{{studentResult.studentId}}</td>
                     <td>{{studentResult.resultStatus}}</td>
+                    <td data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="true"
+                        aria-controls="collapseOne" (click)="onModal(i)"><i class="fas fa-eye"></i></td>
+
                 </tr>
             </tbody>
         </table>
@@ -58,4 +51,28 @@
             <h3 class="text-center text-danger">{{name}} has not given any exam.</h3>
         </ng-container>
     </div>
+    <!-- Student Result end -->
+
+
+    <!-- Answer sheet Modal start -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Student Exam Sheet</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" *ngFor="let result of studentAnswer">
+                    <ul class="list-group">
+                        <li class="list-group-item">Question:- {{result.question}}</li>
+                        <li class="list-group-item">Answer:- {{result.answer}}</li>
+                    </ul>
+                </div>
+                <div *ngIf="noAnswer" class="text-danger m-3">
+                    <h3>No Question And Answer</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Answer sheet Modal end -->
 </div>

@@ -192,7 +192,12 @@ export interface ViewExamResponses {
 //view exam details interface end
 
 //teacher folder view student details result start
+export interface StudentAnswer {
+    question: string,
+    answer: string
+}
 export interface Result {
+    studentAnswer: string[],
     _id: string,
     rank: number,
     subjectName: string,
