@@ -27,7 +27,6 @@
                     <th scope="col">Rank</th>
                     <th scope="col">SubjectName</th>
                     <th scope="col">Score</th>
-                    <th scope="col">StudentID</th>
                     <th scope="col">ResultStatus</th>
                     <th scope="col">Student Answer</th>
                 </tr>
@@ -39,7 +38,6 @@
                     <td>{{studentResult.rank}}</td>
                     <td>{{studentResult.subjectName}}</td>
                     <td>{{studentResult.score}}</td>
-                    <td>{{studentResult.studentId}}</td>
                     <td>{{studentResult.resultStatus}}</td>
                     <td data-bs-toggle="modal" data-bs-target="#exampleModal" aria-expanded="true"
                         aria-controls="collapseOne" (click)="onModal(i)"><i class="fas fa-eye"></i></td>
@@ -55,18 +53,21 @@
 
 
     <!-- Answer sheet Modal start -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+    <div class="modal fade c-height" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content ">
                 <div class="modal-header">
                     <h2 class="modal-title" id="exampleModalLabel">Student Exam Sheet</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" *ngFor="let result of studentAnswer">
-                    <ul class="list-group">
-                        <li class="list-group-item">Question:- {{result.question}}</li>
-                        <li class="list-group-item">Answer:- {{result.answer}}</li>
-                    </ul>
+                <div class="modal-body">
+                    <ng-container *ngFor="let result of studentAnswer">
+                        <ul class="list-group">
+                            <li class="list-group-item">Question:- {{result.question}}</li>
+                            <li class="list-group-item">Answer:- {{result.answer}}</li>
+                        </ul>
+                    </ng-container>
                 </div>
                 <div *ngIf="noAnswer" class="text-danger m-3">
                     <h3>No Question And Answer</h3>

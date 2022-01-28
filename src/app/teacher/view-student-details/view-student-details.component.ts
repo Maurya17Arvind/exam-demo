@@ -76,7 +76,7 @@ export class ViewStudentDetailsComponent implements OnInit {
     if (this.studentResults[i].studentAnswer) {
       if (this.studentResults[i].studentAnswer.length > 0) {
         this.studentAnswer = this.studentResults[i].studentAnswer;
-        console.log('this.studentAnswer :>> ', this.studentAnswer);
+        // console.log('this.studentAnswer :>> ', this.studentAnswer);
         this.noAnswer = false;
       }
     } else {
