@@ -12,10 +12,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { JwtInterceptor } from './interceptor/jwt.interceptor';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthGuard } from './Authguard/auth.guard';
 import { AuthService } from './Authguard/auth.service';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -34,8 +32,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    NgxSpinnerModule,
-    NgxPaginationModule
   ],
 
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, AuthGuard, AuthService],

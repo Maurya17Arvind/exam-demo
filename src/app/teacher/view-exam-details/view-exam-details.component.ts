@@ -26,6 +26,12 @@ export class ViewExamDetailsComponent implements OnInit {
     this.getExamPaper();
   }
 
+  // public spinners() {
+  //   this.spinner.show();
+  //   setTimeout(() => {
+  //     this.spinner.hide();
+  //   }, 2000);
+  // }
   public getExamPaper() {
     if (this.examQuestion.statusCode == 200) {
       this.backButton = true;

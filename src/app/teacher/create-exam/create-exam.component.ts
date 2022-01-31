@@ -18,7 +18,7 @@ export class CreateExamComponent implements OnInit {
   public createExamButton: boolean = false;
   public viewExam: boolean = false;
 
-  constructor(private userService: UsersService, private formBuilder: FormBuilder, private router: Router, private toster: ToastrService) {
+  constructor(private userService: UsersService, private formBuilder: FormBuilder, private router: Router, private toastr: ToastrService) {
     // this.examForm = this.formBuilder.group({
     // })
   }
@@ -26,41 +26,54 @@ export class CreateExamComponent implements OnInit {
   ngOnInit(): void {
     this.examForm = this.formBuilder.group({
       subjectName: ['', Validators.required],
-      questions: new FormArray([]),
-      notes: new FormControl(['Arvind', 'Maurya']),
+      questions: this.formBuilder.array([]),
+      notes: this.formBuilder.array([]),
     });
     this.addQuestion();
-    // this.addNotes();
+    this.addNote();
   }
-
+  public createExam() {
+    return this.formBuilder.group({
+      question: 'asdfa',
+      answer: 'asda',
+      options: this.formBuilder.group({
+        option1: 'asd',
+        option2: 'asd',
+        option3: 'asd',
+        option4: 'asd'
+      })
+    });
+  }
   public createPaper() {
-    this.userService.createExam(this.examForm.value).subscribe({
-      next: (res: CreateExamResponses) => {
-        if (res.statusCode == 200) {
-          console.log('exam  :>> ', res);
-          this.toster.success(res.message);
-          this.viewExam = true;
-        } else {
-          this.toster.error(res.message);
-          this.viewExam = false;
-        }
+    const { subjectName, questions, notes } = this.examForm.value;
+    const data: any = {};
+    const finalQuestion: any = [];
+    data.subjectName = subjectName;
+    data.notes = notes;
+    questions.forEach((element) => {
+      const finalElement: any = {};
+      const secondElement: any = {};
+      finalElement.question = element.question;
+      finalElement.answer = element.answer;
+      finalElement.options = [];
+      secondElement.options = [];
+      secondElement.options.push(Object.values(element.options));
+      secondElement.options.forEach(element => {
+        finalElement.options = element;
+      });
+      finalQuestion.push(finalElement);
+
+    });
+    data.questions = finalQuestion;
+    this.userService.createExam(data).subscribe({
+      next: (res) => {
+        this.viewExam = true;
+        this.toastr.success(res.message);
       },
       error: (err) => {
-        this.toster.error(err.message);
+        this.toastr.error(err);
       }
     })
-  }
-
-  public createExam(): FormGroup {
-    return this.formBuilder.group({
-      question: 'Which of the following statements define Computer Graphics?',
-      answer: 'It refers to designing images',
-      options: new FormControl(['ans1', 'ans2', 'ans3', 'ans4'])
-      // option1: 'It refers to designing plans',
-      // option2: ' It means designing computers',
-      // option3: 'It refers to designing images',
-      // option4: 'None of the mentioned'
-    });
   }
 
 
@@ -77,6 +90,18 @@ export class CreateExamComponent implements OnInit {
     this.questions.removeAt(i);
   }
 
+
+  //Add notes start
+  get noteData() {
+    return this.examForm.get('notes') as FormArray;
+  }
+  public addNote() {
+    this.noteData.push(new FormControl(''))
+  }
+  public removeNotes(i: number) {
+    this.noteData.removeAt(i);
+  }
+  //Add notes end
   // public addNotes() {
   //   this.notes = this.examForm.get('notes') as FormArray;
   //   this.notes.push(this.notesData())

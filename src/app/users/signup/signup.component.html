@@ -5,7 +5,8 @@
             <label for="exampleInputName" class="form-label">Name</label>
             <input type="text" name="name" formControlName="name" class="form-control" id="exampleInputName"
                 aria-describedby="emailHelp">
-            <div class="text-danger" *ngIf="fControl['name'].touched && fControl['name'].errors?.['required']">
+            <div class="alert alert-danger mt-2"
+                *ngIf="fControl['name'].touched && fControl['name'].errors?.['required']">
                 Name is required
             </div>
         </div>

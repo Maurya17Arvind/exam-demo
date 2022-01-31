@@ -13,6 +13,7 @@ import { VerifyStudentDataComponent } from './verify-student-data/verify-student
 import { EditExamComponent } from './edit-exam/edit-exam.component';
 import { FormArrayLearnComponent } from './form-array-learn/form-array-learn.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     TeacherRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxSpinnerModule
   ]
 })
 export class TeacherModule { }

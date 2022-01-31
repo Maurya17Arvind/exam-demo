@@ -29,7 +29,6 @@ export class EditExamComponent implements OnInit {
   ngOnInit(): void {
     this.userService.viewExamDeatils(this.id).subscribe({
       next: (res) => {
-        console.log('res view :>> ', res);
         if (res.statusCode == 200) {
           this.viewExamDeatils = res.data.questions;
           this.toster.success(res.message);

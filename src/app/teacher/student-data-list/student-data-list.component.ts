@@ -16,7 +16,7 @@ export class StudentDataListComponent implements OnInit, canComponentDeactivate 
   public count: Number = 15;
 
   public studentsList: StudentList[];
-  public backButton: boolean = false;
+  public loadData: boolean = false;
   public resData: StudentListResponse;
   public totalStudent: number;
 
@@ -32,9 +32,9 @@ export class StudentDataListComponent implements OnInit, canComponentDeactivate 
       this.totalStudent = this.resData.count;
       this.studentsList = this.resData.data;
       this.toster.success(this.resData.message);
-      this.backButton = true;
+      this.loadData = true;
     } else {
-      this.toster.error(this.resData.message)
+      this.toster.error(this.resData.message);
     }
   }
 

@@ -1,0 +1,93 @@
+<!-- <div class="m-3">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <input type="text" placeholder="FirstName" formControlName="firstName"><br><br>
+        <input type="text" placeholder="LastName" formControlName="lastName"><br><br>
+        <input type="email" placeholder="Email" formControlName="email"><br><br>
+        <input type="password" placeholder="Password" formControlName="password"><br><br>
+        <label> Address</label><br><br>
+        <ng-container formGroupName="address">
+            <input type="text" placeholder="Stat" formControlName="stat"><br><br>
+            <input type="text" placeholder="City" formControlName="city"><br><br>
+            <input type="text" placeholder="PinCode" formControlName="pincode"><br><br>
+        </ng-container>
+        <ng-container formArrayName="mobile" *ngFor="let mob of myForm.get('mobile')['controls']; let i=index;">
+            <input type="text" [formControlName]="i" placeholder="Number">
+        </ng-container>
+        <button class="btn btn-primary" type="button" (click)="addNumber()">Add Number</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {{myForm.value | json}}
+</div> -->
+
+<div class="m-3 card d-flex justify-content-center">
+    <form [formGroup]="myForm">
+        <button class="btn btn-primary" (click)="createExam()">Create</button>
+        <div class="m-3">
+            <div class="form-group m-2">
+                <input type="text" class="form-control" placeholder="SubjectName" formControlName="subjectName">
+            </div>
+            <!--Add Qustion And Answer start with options-->
+            <div class="form-group m-2">
+                <ng-container formArrayName="questions"
+                    *ngFor="let p of myForm.get('questions')['controls'];let i=index;">
+                    <div [formGroupName]="i" class="mt-2">
+                        <input type="text" class="form-control" placeholder="Question" formControlName="question">
+                        <input type="text" class="form-control mt-2" placeholder="Answer" formControlName="answer">
+                        <!-- <ng-container formArrayName="options"
+                            *ngFor="let option of myForm.get('options')['controls']; let iOption=index;">
+                            <div [formGroupName]="iOption" ]>
+                                <input type="text" class="form-control w-50 mt-1" placeholder="Option A"
+                                    formControlName="">
+                                <input type="text" class="form-control w-50 mt-1" placeholder="Option B"
+                                    formControlName="">
+                                <input type="text" class="form-control w-50 mt-1" placeholder="Option C"
+                                    formControlName="">
+                                <input type="text" class="form-control w-50 mt-1" placeholder="Option D"
+                                    formControlName="">
+                            </div>
+                        </ng-container> -->
+                        <!-- <button class="btn btn-primary" type="button" (click)="addOption()">Add Option</button> -->
+                        <div formGroupName="options">
+                            <input type="text" class="form-control w-50 mt-1" placeholder="Option A"
+                                formControlName="option1">
+                            <input type="text" class="form-control w-50 mt-1" placeholder="Option B"
+                                formControlName="option2">
+                            <input type="text" class="form-control w-50 mt-1" placeholder="Option C"
+                                formControlName="option3">
+                            <input type="text" class="form-control w-50 mt-1" placeholder="Option D"
+                                formControlName="option4">
+                        </div>
+                    </div>
+                </ng-container>
+                <div>
+                    <button class="btn btn-primary mt-2" type="button" (click)="onAdd()">Add Question</button>
+                </div>
+            </div>
+            <!--Add Qustion And Answer end with options-->
+
+            <!--Add notes start-->
+            <div class="form-group m-2">
+                <ng-container formArrayName="notes" *ngFor="let n of myForm.get('notes')['controls']; let i=index;">
+                    <input type="text" class="form-control mt-2" placeholder="Notes {{i+1}}" [formControlName]="i">
+                </ng-container>
+                <button type="button" class="btn btn-primary mt-2" (click)="addNote()">Add Note</button>
+            </div>
+            <!--Add notes end-->
+
+            <!--option start -->
+            <!-- <div class="form-group d-flex justify-content-between flex-wrap">
+                <ng-container formArrayName="options"
+                    *ngFor="let option of myForm.get('options')['controls']; let i=index;">
+                    <input type="text" class="form-control w-50 mt-1" placeholder="Option A" [formControlName]="i">
+                    <input type="text" class="form-control w-50 mt-1" placeholder="Option B" formControlName="option2">
+                    <input type="text" class="form-control w-50 mt-1" placeholder="Option C" formControlName="option3">
+                    <input type="text" class="form-control w-50 mt-1" placeholder="Option D" formControlName="option4">
+                </ng-container>
+                <button class="btn btn-primary" type="button" (click)="addOption()">Add Option</button>
+            </div> -->
+            <!--option end -->
+
+        </div>
+    </form>
+    {{myForm.value | json}}
+</div>

@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-end m-3">
-    <button type="button" class="btn btn-primary" routerLink="/teacher" *ngIf="backButton"><i
+    <button type="button" class="btn btn-primary" routerLink="/teacher" *ngIf="loadData"><i
             class="fas fa-backward mx-2"></i>Go Back Home</button>
 </div>
 <div>
@@ -7,7 +7,7 @@
 </div>
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
-        <thead *ngIf="backButton">
+        <thead *ngIf="loadData">
             <tr>
                 <th scope="col">Status</th>
                 <th scope="col">Id</th>
