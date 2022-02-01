@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { JwtInterceptor } from './interceptor/jwt.interceptor';
 import { AuthGuard } from './Authguard/auth.guard';
 import { AuthService } from './Authguard/auth.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { AuthService } from './Authguard/auth.service';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule
   ],
 
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, AuthGuard, AuthService],

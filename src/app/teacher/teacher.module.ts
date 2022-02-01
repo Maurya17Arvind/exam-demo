@@ -14,6 +14,7 @@ import { EditExamComponent } from './edit-exam/edit-exam.component';
 import { FormArrayLearnComponent } from './form-array-learn/form-array-learn.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { EditTestingComponent } from './edit-testing/edit-testing.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HomeTeacherComponent,
     VerifyStudentDataComponent,
     EditExamComponent,
-    FormArrayLearnComponent
+    FormArrayLearnComponent,
+    EditTestingComponent
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,13 @@
-<button class="btn btn-primary m-3" (click)="editExam()" *ngIf="updateButton">Update Exam</button>
+<button class="btn btn-primary m-3" (click)="changeExam()" *ngIf="updateButton">Update Exam</button>
 <button class="btn btn-primary m-3" routerLink="/viewExam" *ngIf="updateButton">Go Back</button>
+<!-- <div>
+    <form formGroup="myForm">
+        <input type="text" class="form-control" formControlName="subjectName">
+    </form>
+</div> -->
 <div class="card mt-4" *ngFor="let viewExamDetail of viewExamDeatils; let i=index;">
     <div class="card-header">
-        <h3>{{i+1}}:-{{viewExamDetail.question | titlecase}}</h3>
+        <h3>{{i+1}}:- <input type="text" class="form-control" value="{{viewExamDetail.question}}"></h3>
     </div>
     <div class="card-body d-flex">
         <div class="d-flex w-50">

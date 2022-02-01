@@ -4,6 +4,7 @@ import { UsersService } from 'src/app/users.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { LoginResponse } from 'src/app/AllInterFace/student-list';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   // public isLogIn: boolean = false;
   public loginForm!: FormGroup
-  constructor(private usersService: UsersService, private formBuilder: FormBuilder, private toster: ToastrService, private router: Router) {
+  constructor(private usersService: UsersService, private spinner: NgxSpinnerService, private formBuilder: FormBuilder, private toster: ToastrService, private router: Router) {
     this.loginForm = this.formBuilder.group({
       email: ['arvind.tagline@gmail.com', [Validators.required, Validators.email]],
       password: ['123456', [Validators.required, Validators.minLength(6)]],
@@ -26,11 +27,14 @@ export class LoginComponent implements OnInit {
   }
 
   public onLogin() {
+    this.spinner.show();
     this.usersService.loginData(this.loginForm.value).subscribe({
       next: (res: LoginResponse) => {
         if (res.statusCode == 200) {
+          this.spinner.hide();
           if (res.data.role === 'teacher') {
             localStorage.setItem('token', res.data.token);
+            this.spinner.hide();
             localStorage.setItem('teacherName', res.data.name);
             localStorage.setItem('teacherRole', res.data.role);
             localStorage.setItem('teacherEmail', res.data.email);
@@ -40,12 +44,14 @@ export class LoginComponent implements OnInit {
           else {
             localStorage.setItem('token', res.data.token)
             this.toster.success(res.message);
+            this.spinner.hide();
             localStorage.setItem('studentName', res.data.name)
             localStorage.setItem('studentEmail', res.data.email)
             this.router.navigate(['student'])
           }
         } else {
           this.toster.error(res.message);
+          this.spinner.hide();
         }
       },
       error: (err) => {

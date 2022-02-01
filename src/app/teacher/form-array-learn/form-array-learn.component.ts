@@ -17,7 +17,6 @@ import { UsersService } from 'src/app/users.service';
 export class FormArrayLearnComponent implements OnInit {
 
   public myForm: FormGroup;
-  // public addressForm!: FormGroup;
   public questions: FormArray;
   public notes: FormArray;
   public options: FormArray;
@@ -25,28 +24,6 @@ export class FormArrayLearnComponent implements OnInit {
   public extraOption = [];
 
   constructor(private fb: FormBuilder, private userService: UsersService, private toastr: ToastrService) {
-    // this.myForm = new FormGroup({
-    //   firstName: new FormControl(),
-    //   lastName: new FormControl(),
-    //   email: new FormControl(),
-    //   password: new FormControl(),
-    //   addressForm: new FormGroup({
-    //     stat: new FormControl(),
-    //     city: new FormControl()
-    //   })
-    // })
-    // this.myForm = this.fb.group({
-    //   firstName: 'Arvind',
-    //   lastName: 'Maurya',
-    //   email: 'arvind.tagline@gmail.com',
-    //   password: '123456',
-    //   address: this.fb.group({
-    //     stat: 'Gujarat',
-    //     city: 'Surat',
-    //     pincode: '394221'
-    //   }),
-    //   mobile: this.fb.array([new FormControl()])
-    // })
     this.myForm = this.fb.group({
       subjectName: 'Intro',
       questions: this.fb.array([]),
@@ -61,13 +38,13 @@ export class FormArrayLearnComponent implements OnInit {
 
   public papers() {
     return this.fb.group({
-      question: 'hello',
-      answer: 'hey',
+      question: '',
+      answer: '',
       options: this.fb.group({
-        option1: 'A',
-        option2: 'B',
-        option3: 'C',
-        option4: 'D'
+        option1: '',
+        option2: '',
+        option3: '',
+        option4: ''
       })
     })
   }
@@ -76,19 +53,6 @@ export class FormArrayLearnComponent implements OnInit {
   //   console.log('object :>> ', object);
   // }
 
-  //testing code start
-
-  // get mbData() {
-  //   return this.myForm.get('mobile') as FormArray;
-  // }
-
-  // public addNumber() {
-  //   this.mbData.push(new FormControl(''))
-  // }
-  // public onSubmit() {
-  //   console.log('this.myForm.value :>> ', this.myForm.value);
-  // }
-  //testing code end 
 
   //add Question start
   public onAdd() {
@@ -130,7 +94,11 @@ export class FormArrayLearnComponent implements OnInit {
     data.questions = finalQuestion;
     this.userService.createExam(data).subscribe({
       next: (res) => {
-        this.toastr.success(res.message);
+        if (res.statusCode == 200) {
+          this.toastr.success(res.message);
+        } else {
+          this.toastr.error(res.message);
+        }
       },
       error: (err) => {
         this.toastr.error(err);

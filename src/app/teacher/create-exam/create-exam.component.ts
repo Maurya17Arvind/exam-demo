@@ -34,13 +34,13 @@ export class CreateExamComponent implements OnInit {
   }
   public createExam() {
     return this.formBuilder.group({
-      question: 'asdfa',
-      answer: 'asda',
+      question: '',
+      answer: '',
       options: this.formBuilder.group({
-        option1: 'asd',
-        option2: 'asd',
-        option3: 'asd',
-        option4: 'asd'
+        option1: '',
+        option2: '',
+        option3: '',
+        option4: ''
       })
     });
   }
@@ -51,24 +51,28 @@ export class CreateExamComponent implements OnInit {
     data.subjectName = subjectName;
     data.notes = notes;
     questions.forEach((element) => {
+      const tempElement: any = {};
       const finalElement: any = {};
-      const secondElement: any = {};
-      finalElement.question = element.question;
-      finalElement.answer = element.answer;
+      tempElement.question = element.question;
+      tempElement.answer = element.answer;
+      tempElement.options = [];
       finalElement.options = [];
-      secondElement.options = [];
-      secondElement.options.push(Object.values(element.options));
-      secondElement.options.forEach(element => {
-        finalElement.options = element;
+      finalElement.options.push(Object.values(element.options));
+      finalElement.options.forEach(element => {
+        tempElement.options = element;
       });
-      finalQuestion.push(finalElement);
+      finalQuestion.push(tempElement);
 
     });
     data.questions = finalQuestion;
     this.userService.createExam(data).subscribe({
       next: (res) => {
-        this.viewExam = true;
-        this.toastr.success(res.message);
+        if (res.statusCode == 200) {
+          this.viewExam = true;
+          this.toastr.success(res.message);
+        } else {
+          this.toastr.error(res.message);
+        }
       },
       error: (err) => {
         this.toastr.error(err);
@@ -102,10 +106,5 @@ export class CreateExamComponent implements OnInit {
     this.noteData.removeAt(i);
   }
   //Add notes end
-  // public addNotes() {
-  //   this.notes = this.examForm.get('notes') as FormArray;
-  //   this.notes.push(this.notesData())
-  //   console.log('this.notes :>> ', this.notes);
-  // }
 
 }

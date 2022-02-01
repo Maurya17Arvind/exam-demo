@@ -8,6 +8,7 @@ import { ViewExamDetailResolver } from '../Resolver/view-exam-detail.resolver';
 import { ViewStudentDetailResolver } from '../Resolver/view-student-detail.resolver';
 import { CreateExamComponent } from './create-exam/create-exam.component';
 import { EditExamComponent } from './edit-exam/edit-exam.component';
+import { EditTestingComponent } from './edit-testing/edit-testing.component';
 import { FormArrayLearnComponent } from './form-array-learn/form-array-learn.component';
 import { HomeTeacherComponent } from './home-teacher/home-teacher.component';
 import { StudentDataListComponent } from './student-data-list/student-data-list.component';
@@ -63,9 +64,13 @@ const routes: Routes = [
     path: 'editExam/:_id',
     component: EditExamComponent
   },
+  // {
+  //   path: 'test',
+  //   component: FormArrayLearnComponent
+  // },
   {
     path: 'test',
-    component: FormArrayLearnComponent
+    component: EditTestingComponent
   },
   {
     path: '**',

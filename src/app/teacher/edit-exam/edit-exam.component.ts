@@ -13,9 +13,9 @@ import { UsersService } from 'src/app/users.service';
 export class EditExamComponent implements OnInit {
 
   public id!: string;
+  public myForm!: FormGroup;
   public updateButton: boolean = false;
   public allQuestion: Object = {};
-  // public editData = [];
   public viewExamDeatils: EditViewResponseData[];
 
 
@@ -45,7 +45,7 @@ export class EditExamComponent implements OnInit {
 
   }
 
-  public editExam(): void {
+  public changeExam(): void {
     this.allQuestion = {
       subjectName: "Arvind Exam",
       questions: this.viewExamDeatils,
@@ -54,6 +54,7 @@ export class EditExamComponent implements OnInit {
 
     this.userService.editExam(this.id, this.allQuestion).subscribe({
       next: (res: EditShowExamResponse) => {
+        console.log('res.data :>> ', res.data);
         if (res.statusCode == 200) {
           this.toster.success(res.message);
           this.router.navigate(['/viewExam'])

@@ -50,6 +50,7 @@ export class ProfileComponent implements OnInit {
         if (res.statusCode == 200) {
           this.showProfile = true;
           this.studentProfile = res.data;
+          console.log('this.studentProfile :>> ', this.studentProfile);
           this.toster.success(res.message);
         } else {
           this.showProfile = false;
@@ -70,6 +71,9 @@ export class ProfileComponent implements OnInit {
       next: (res: UpdateStudentName) => {
         if (res.statusCode == 200) {
           this.toster.success(res.message);
+        }
+        else {
+          this.toster.error(res.message);
         }
       },
       error: (err) => {
