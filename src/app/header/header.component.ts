@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  public clearToken() {
+  public logOut() {
     localStorage.clear();
     this.isLogin = false;
     this.router.navigate(['/login']);

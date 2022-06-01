@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EditShowExamResponse, EditViewResponseData } from 'src/app/AllInterFace/student-list';
@@ -12,49 +12,44 @@ import { UsersService } from 'src/app/users.service';
 })
 export class EditTestingComponent implements OnInit {
 
-  public id!: string;
-  public myForm!: FormGroup;
-  public updateButton: boolean = false;
-  public allQuestion: Object = {};
+  public examForm!: FormGroup;
   public questions!: FormArray;
+  public notes!: FormArray;
+  public createExamButton: boolean = false;
+  public viewExam: boolean = false;
+  public allQuestion: Object = {};
   public viewExamDeatils: EditViewResponseData[];
+  public id!: string;
 
 
-
-  constructor(private userService: UsersService, private activatedRoute: ActivatedRoute, private toster: ToastrService, private router: Router, private fb: FormBuilder) {
+  constructor(private userService: UsersService, private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router, private toastr: ToastrService) {
     this.id = this.activatedRoute.snapshot.params['_id'];
   }
-
-
 
   ngOnInit(): void {
     this.userService.viewExamDeatils(this.id).subscribe({
       next: (res) => {
-        console.log('res :>> ', res.data);
         if (res.statusCode == 200) {
-          // this.viewExamDeatils = res.data.questions;
-          this.toster.success(res.message);
-          this.updateButton = true;
+          this.viewExamDeatils = res.data.questions;
         } else {
-          this.updateButton = false;
         }
       },
       error: (err) => {
-        this.toster.error(err.message);
       }
     })
-    this.myForm = this.fb.group({
-      subjectName: [''],
-      questions: this.fb.array([]),
-      notes: this.fb.array([]),
+    this.examForm = this.formBuilder.group({
+      subjectName: ['', Validators.required],
+      questions: this.formBuilder.array([]),
+      notes: this.formBuilder.array([]),
     });
-
+    this.addQuestion();
+    this.addNote();
   }
   public createExam() {
-    return this.fb.group({
+    return this.formBuilder.group({
       question: '',
       answer: '',
-      options: this.fb.group({
+      options: this.formBuilder.group({
         option1: '',
         option2: '',
         option3: '',
@@ -62,9 +57,8 @@ export class EditTestingComponent implements OnInit {
       })
     });
   }
-
   public createPaper() {
-    const { subjectName, questions, notes } = this.myForm.value;
+    const { subjectName, questions, notes } = this.examForm.value;
     const data: any = {};
     const finalQuestion: any = [];
     data.subjectName = subjectName;
@@ -84,28 +78,64 @@ export class EditTestingComponent implements OnInit {
 
     });
     data.questions = finalQuestion;
+    this.userService.createExam(data).subscribe({
+      next: (res) => {
+        if (res.statusCode == 200) {
+          this.viewExam = true;
+          this.toastr.success(res.message);
+        } else {
+          this.toastr.error(res.message);
+        }
+      },
+      error: (err) => {
+        this.toastr.error(err);
+      }
+    })
   }
-  public editExam(): void {
-    this.questions = this.myForm.get('questions') as FormArray;
+
+
+  public addQuestion() {
+    this.questions = this.examForm.get('questions') as FormArray;
     this.questions.push(this.createExam());
+    if (this.questions.length == 15) {
+      this.createExamButton = true;
+    }
+  }
+
+  public removeQuestion(i: number) {
+    this.questions = this.examForm.get('questions') as FormArray;
+    this.questions.removeAt(i);
+  }
+
+
+  //Add notes start
+  get noteData() {
+    return this.examForm.get('notes') as FormArray;
+  }
+  public addNote() {
+    this.noteData.push(new FormControl(''))
+  }
+  public removeNotes(i: number) {
+    this.noteData.removeAt(i);
+  }
+  //Add notes end
+
+  public changeExam(): void {
     this.allQuestion = {
       subjectName: "Arvind Exam",
       questions: this.viewExamDeatils,
       notes: ["10mins exam", "start time 10am"]
     }
 
-    this.userService.editExam(this.id, this.myForm).subscribe({
+    this.userService.editExam(this.id, this.allQuestion).subscribe({
       next: (res: EditShowExamResponse) => {
-        console.log('res :>> ', res);
+        console.log('res.data :>> ', res.data);
         if (res.statusCode == 200) {
-          this.toster.success(res.message);
           this.router.navigate(['/viewExam'])
         } else {
-          this.toster.error(res.message);
         }
       },
       error: (err) => {
-        this.toster.error(err.message);
       }
     })
   }

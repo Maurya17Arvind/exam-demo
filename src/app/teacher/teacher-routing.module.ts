@@ -62,16 +62,16 @@ const routes: Routes = [
   },
   {
     path: 'editExam/:_id',
-    component: EditExamComponent
+    component: EditTestingComponent
   },
   // {
   //   path: 'test',
   //   component: FormArrayLearnComponent
   // },
-  {
-    path: 'test',
-    component: EditTestingComponent
-  },
+  // {
+  //   path: 'test',
+  //   component: EditTestingComponent
+  // },
   {
     path: '**',
     redirectTo: ''

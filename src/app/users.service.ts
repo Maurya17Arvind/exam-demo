@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class UsersService {
 
   // public isLogOut: boolean = false;
-  public token = localStorage.getItem('token') || '';
+  public token:string = localStorage.getItem('token') || '';
   // public header = new HttpHeaders().set('access-token', this.token);
   // public studentToken = localStorage.getItem('token') || '';
   // public studentHeader = new HttpHeaders().set('access-token', this.studentToken);
