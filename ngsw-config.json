@@ -31,7 +31,7 @@
     {
       "name": "customer",
       "urls": [
-        "http://localhost:4200/"
+        "https://exam-demo-arvind.herokuapp.com/"
       ],
       "cacheConfig": {
         "maxAge": "1h",
