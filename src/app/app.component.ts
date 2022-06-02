@@ -18,7 +18,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.serviceWorker.isEnabled) {
+    console.log('Start service wroker');
+    if (!this.serviceWorker.isEnabled) {
+      console.log('Service worker is not enabled');
       return;
     }
     this.handelVersionUpdate();
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit {
 
   public handelVersionUpdate(): void {
     this.serviceWorker.versionUpdates.subscribe((event: VersionEvent) => {
+      console.log('event', event)
       alert(event.type);
       if (event.type === "VERSION_READY" &&
         confirm(
