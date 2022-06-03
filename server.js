@@ -11,11 +11,11 @@ app.get("/*", (req, res) =>
 );
 
 // Start SwPush
-const webpush = require("web-push");
+// const webpush = require("web-push");
 // console.log(webpush.generateVAPIDKeys());
-const publicKey =
-  "BEz285PUXIx76SaGW6IZxbBGM7jdGHzESF1r7dCjwoeuPtXATHxd_WMwoQO4prqSa2dUXohqXbB01ihKq6HOTTo";
-const privateKey = "pZvm-9C9yMdtJFsLaWLOZ8O0vsxCSo3EOKL9HpsIUX4";
+// const publicKey =
+//   "BEz285PUXIx76SaGW6IZxbBGM7jdGHzESF1r7dCjwoeuPtXATHxd_WMwoQO4prqSa2dUXohqXbB01ihKq6HOTTo";
+// const privateKey = "pZvm-9C9yMdtJFsLaWLOZ8O0vsxCSo3EOKL9HpsIUX4";
 
 // const sub = {
 //   endpoint: "https://fcm.googleapis.com/fcm/send/eG64DzM8Is0:APA91bFFhoFmn2TTfCiwm_cWNxPMuJ1A0BqArwrlxaB10yXx8J7NsUZu_y43Z-2meNRn6AXTaAs2vzQXNB7oeT-bAY-vFXfxtfYIPkTp9_5IjylS1u18CIBXY4Yh36GZyaBRPL_Eiyrr",
