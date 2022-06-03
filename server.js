@@ -36,7 +36,6 @@ const payload = {
     tag: "push demo",
     requireInteraction: true,
     renotify: true,
-    data: { url: "https://google.com" },
   },
 };
 webpush.sendNotification(sub, JSON.stringify(payload));
