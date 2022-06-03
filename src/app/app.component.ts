@@ -68,7 +68,6 @@ export class AppComponent implements OnInit {
   }
 
   public async pushNotifications() {
-    console.log('pushNotifications')
     try {
       const sub = await this.pushService.requestSubscription({
         serverPublicKey: "BOBlBr9Yz5VqIb-MR49NHz4f-uIEklTjskFK28WlTYD3iZ3myNKqDLHTx-lFyZ_J9Q5_8mKd0rn-dzGlrQ0X8nY"
