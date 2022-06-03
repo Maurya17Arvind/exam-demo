@@ -17,19 +17,14 @@ export class AppComponent implements OnInit {
   @HostListener('window:beforeinstallprompt', ['$event'])
     
   onbeforeinstallprompt(e) {
-    console.log(e);
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
     e.preventDefault();
-    // Stash the event so it can be triggered later.
     this.deferredPrompt = e;
-    this.showButton = true;
   }
 
   constructor(private router: Router,
     private spinner: NgxSpinnerService,
     private serviceWorker: SwUpdate,
     private pushService: SwPush,
-    // private notificationService: NewsletterService
   ) {
     this.router.events.subscribe((e: RouterEvent) => {
       this.navigationInterceptor(e);
@@ -63,6 +58,7 @@ export class AppComponent implements OnInit {
       alert('Error reason :' + event.reason);
     })
   }
+
   subscribeToNotifications() {
     // this.pushService.requestSubscription({
     //   serverPublicKey: this.VAPID_PUBLIC_KEY
@@ -91,12 +87,10 @@ export class AppComponent implements OnInit {
       console.log(subscription);
     });
   }
+
+  //add button for add to home screen
   addToHomeScreen() {
-    // hide our user interface that shows our A2HS button
-    this.showButton = false;
-    // Show the prompt
     this.deferredPrompt.prompt();
-    // Wait for the user to respond to the prompt
     this.deferredPrompt.userChoice
       .then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
@@ -118,7 +112,7 @@ export class AppComponent implements OnInit {
     this.pushService.requestSubscription({
       serverPublicKey: this.VAPID_PUBLIC_KEY,
     }).then(sub => {
-      console.log('sub', sub)
+      console.log('sub', JSON.stringify(sub));
     }).catch(err => {
       console.log('err', err)
     })
