@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { SwPush, SwUpdate, UnrecoverableStateEvent, VersionEvent, VersionReadyEvent } from '@angular/service-worker';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -10,8 +10,20 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AppComponent implements OnInit {
   title = 'exam-demo';
-  readonly VAPID_PUBLIC_KEY = "BOBlBr9Yz5VqIb-MR49NHz4f-uIEklTjskFK28WlTYD3iZ3myNKqDLHTx-lFyZ_J9Q5_8mKd0rn-dzGlrQ0X8nY";
+  private readonly VAPID_PUBLIC_KEY = "BEz285PUXIx76SaGW6IZxbBGM7jdGHzESF1r7dCjwoeuPtXATHxd_WMwoQO4prqSa2dUXohqXbB01ihKq6HOTTo";
+  deferredPrompt: any;
+  showButton = false;
 
+  @HostListener('window:beforeinstallprompt', ['$event'])
+    
+  onbeforeinstallprompt(e) {
+    console.log(e);
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    this.deferredPrompt = e;
+    this.showButton = true;
+  }
 
   constructor(private router: Router,
     private spinner: NgxSpinnerService,
@@ -25,13 +37,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Start service wroker');
+    this.pushSubscription();
     if (!this.serviceWorker.isEnabled) {
       console.log('Service worker is not enabled');
       return;
     }
-    this.handelVersionUpdate();
     this.pushNotifications();
+    this.handelVersionUpdate();
   }
 
   //On reload site/app show alert if version update
@@ -60,26 +72,57 @@ export class AppComponent implements OnInit {
   }
 
   public async pushNotifications() {
-    // console.log('pushNotifications')
-    // try {
-    //   const sub = await this.pushService.requestSubscription({
-    //     serverPublicKey: "BOBlBr9Yz5VqIb-MR49NHz4f-uIEklTjskFK28WlTYD3iZ3myNKqDLHTx-lFyZ_J9Q5_8mKd0rn-dzGlrQ0X8nY"
-    //   });
-    //   // this.notificationService.addSubscription(sub);
-    // } catch (error) {
-    //   console.error('Could not subscribe due to :', error);
-    // }
-    // this.pushService.messages.subscribe((message) => {
-    //   console.log(message);
-    // });
-    // this.pushService.notificationClicks.subscribe((message) => {
-    //   console.log(message);
-    // });
-    // this.pushService.subscription.subscribe((subscription) => {
-    //   console.log(subscription);
-    // });
+    console.log('pushNotifications')
+    try {
+      const sub = await this.pushService.requestSubscription({
+        serverPublicKey: "BOBlBr9Yz5VqIb-MR49NHz4f-uIEklTjskFK28WlTYD3iZ3myNKqDLHTx-lFyZ_J9Q5_8mKd0rn-dzGlrQ0X8nY"
+      });
+      // this.notificationService.addSubscription(sub);
+    } catch (error) {
+      console.error('Could not subscribe due to :', error);
+    }
+    this.pushService.messages.subscribe((message) => {
+      console.log(message);
+    });
+    this.pushService.notificationClicks.subscribe((message) => {
+      console.log(message);
+    });
+    this.pushService.subscription.subscribe((subscription) => {
+      console.log(subscription);
+    });
+  }
+  addToHomeScreen() {
+    // hide our user interface that shows our A2HS button
+    this.showButton = false;
+    // Show the prompt
+    this.deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    this.deferredPrompt.userChoice
+      .then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+        this.deferredPrompt = null;
+      });
   }
 
+  public pushSubscription() { 
+    console.log('this.pushService', this.pushService.isEnabled)
+    if (!this.pushService.isEnabled) {
+      console.log('Notification is not enabled.');
+      return;
+    }
+
+    this.pushService.requestSubscription({
+      serverPublicKey: this.VAPID_PUBLIC_KEY,
+    }).then(sub => {
+      console.log('sub', sub)
+    }).catch(err => {
+      console.log('err', err)
+    })
+  }
 
   public navigationInterceptor(event: RouterEvent): void {
     if (event instanceof NavigationStart) {
