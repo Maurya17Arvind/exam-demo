@@ -32,12 +32,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (!navigator.onLine) {
+      alert("Please check you connection");
+    }
     this.pushSubscription();
     if (!this.serviceWorker.isEnabled) {
       console.log('Service worker is not enabled');
       return;
     }
-    this.pushNotifications();
+    // this.pushNotifications();
     this.handelVersionUpdate();
   }
 
@@ -59,33 +62,25 @@ export class AppComponent implements OnInit {
     })
   }
 
-  subscribeToNotifications() {
-    // this.pushService.requestSubscription({
-    //   serverPublicKey: this.VAPID_PUBLIC_KEY
-    // })
-    //   .then(sub => this.newsletterService.addPushSubscriber(sub).subscribe())
-    //   .catch(err => console.error("Could not subscribe to notifications", err));
-  }
-
-  public async pushNotifications() {
-    try {
-      const sub = await this.pushService.requestSubscription({
-        serverPublicKey: "BOBlBr9Yz5VqIb-MR49NHz4f-uIEklTjskFK28WlTYD3iZ3myNKqDLHTx-lFyZ_J9Q5_8mKd0rn-dzGlrQ0X8nY"
-      });
-      // this.notificationService.addSubscription(sub);
-    } catch (error) {
-      console.error('Could not subscribe due to :', error);
-    }
-    this.pushService.messages.subscribe((message) => {
-      console.log(message);
-    });
-    this.pushService.notificationClicks.subscribe((message) => {
-      console.log(message);
-    });
-    this.pushService.subscription.subscribe((subscription) => {
-      console.log(subscription);
-    });
-  }
+  // public async pushNotifications() {
+  //   try {
+  //     const sub = await this.pushService.requestSubscription({
+  //       serverPublicKey: "BOBlBr9Yz5VqIb-MR49NHz4f-uIEklTjskFK28WlTYD3iZ3myNKqDLHTx-lFyZ_J9Q5_8mKd0rn-dzGlrQ0X8nY"
+  //     });
+  //     // this.notificationService.addSubscription(sub);
+  //   } catch (error) {
+  //     console.error('Could not subscribe due to :', error);
+  //   }
+  //   this.pushService.messages.subscribe((message) => {
+  //     console.log(message);
+  //   });
+  //   this.pushService.notificationClicks.subscribe((message) => {
+  //     console.log(message);
+  //   });
+  //   this.pushService.subscription.subscribe((subscription) => {
+  //     console.log(subscription);
+  //   });
+  // }
 
   //add button for add to home screen
   addToHomeScreen() {
