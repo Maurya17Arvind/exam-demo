@@ -4,5 +4,13 @@
     <p style="color: white"> Wait Loading... </p>
 </ngx-spinner>
     <button (click)="addToHomeScreen()" class="btn btn-info">Add to home screen</button>
-    <button (click)="checkForUpdate()">Check for update</button>
+<button (click)="submitNotification()">
+    Notify me
+</button>
+    <!-- <p *ngIf="isGranted" class="success">
+        Notifications were granted by the user
+    </p>
+    <p *ngIf="!isEnabled" class="error">
+        Notifications are not available in the browser or enabled in the application
+    </p> -->
 <router-outlet></router-outlet>

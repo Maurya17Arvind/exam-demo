@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { SwPush, SwUpdate, UnrecoverableStateEvent, VersionEvent, VersionReadyEvent } from '@angular/service-worker';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NotificationService } from './notification.service';
 
 @Component({
   selector: 'app-root',
@@ -21,17 +22,24 @@ export class AppComponent implements OnInit {
     this.deferredPrompt = e;
   }
 
+  
   constructor(private router: Router,
     private spinner: NgxSpinnerService,
     private swUpdate: SwUpdate,
     private pushService: SwPush,
+    private webNotificationService: NotificationService
   ) {
     this.router.events.subscribe((e: RouterEvent) => {
       this.navigationInterceptor(e);
-    })
+    });
     this.swUpdate.available.subscribe(event => {
       console.log('New update available');
       this.updateToLatest();
+    });
+    this.pushService.notificationClicks.subscribe(event => {
+      console.log('Received notification: ', event);
+      const url = event.notification.data.url;
+      window.open(url, '_blank');
     });
   }
 
@@ -44,6 +52,7 @@ export class AppComponent implements OnInit {
       console.log('Service worker is not enabled');
       return;
     }
+   
     // this.pushNotifications();
     // this.handelVersionUpdate();
   }
@@ -103,7 +112,9 @@ export class AppComponent implements OnInit {
   //   })
   // }
   
-
+  submitNotification(): void {
+    this.webNotificationService.subscribeToNotification();
+  }
   checkForUpdate() {
     if (this.swUpdate.isEnabled) {
       this.swUpdate.checkForUpdate().then(() => {
