@@ -23,44 +23,48 @@ export class AppComponent implements OnInit {
 
   constructor(private router: Router,
     private spinner: NgxSpinnerService,
-    private serviceWorker: SwUpdate,
+    private swUpdate: SwUpdate,
     private pushService: SwPush,
   ) {
     this.router.events.subscribe((e: RouterEvent) => {
       this.navigationInterceptor(e);
     })
+    this.swUpdate.available.subscribe(event => {
+      console.log('New update available');
+      this.updateToLatest();
+    });
   }
 
   ngOnInit(): void {
     if (!navigator.onLine) {
       alert("Please check you connection");
     }
-    this.pushSubscription();
-    if (!this.serviceWorker.isEnabled) {
+    // this.pushSubscription();
+    if (!this.swUpdate.isEnabled) {
       console.log('Service worker is not enabled');
       return;
     }
     // this.pushNotifications();
-    this.handelVersionUpdate();
+    // this.handelVersionUpdate();
   }
 
   //On reload site/app show alert if version update
-  public handelVersionUpdate(): void {
-    this.serviceWorker.versionUpdates.subscribe((event: VersionEvent) => {
-      console.log('event', event)
-      if (event.type === "VERSION_READY" &&
-        confirm(
-          `New version ${(event as VersionReadyEvent).latestVersion.hash} available. Load New Version ?`
-        )
-      ) {
-        window.location.reload();
-      }
-    });
+  // public handelVersionUpdate(): void {
+  //   this.serviceWorker.versionUpdates.subscribe((event: VersionEvent) => {
+  //     console.log('event', event)
+  //     if (event.type === "VERSION_READY" &&
+  //       confirm(
+  //         `New version ${(event as VersionReadyEvent).latestVersion.hash} available. Load New Version ?`
+  //       )
+  //     ) {
+  //       window.location.reload();
+  //     }
+  //   });
 
-    this.serviceWorker.unrecoverable.subscribe((event: UnrecoverableStateEvent) => {
-      alert('Error reason :' + event.reason);
-    })
-  }
+  //   this.serviceWorker.unrecoverable.subscribe((event: UnrecoverableStateEvent) => {
+  //     alert('Error reason :' + event.reason);
+  //   })
+  // }
 
   // public async pushNotifications() {
   //   try {
@@ -83,6 +87,42 @@ export class AppComponent implements OnInit {
   // }
 
   //add button for add to home screen
+  // public pushSubscription() {
+  //   console.log('this.pushService', this.pushService.isEnabled)
+  //   if (!this.pushService.isEnabled) {
+  //     console.log('Notification is not enabled.');
+  //     return;
+  //   }
+
+  //   this.pushService.requestSubscription({
+  //     serverPublicKey: this.VAPID_PUBLIC_KEY,
+  //   }).then(sub => {
+  //     console.log('sub', JSON.stringify(sub));
+  //   }).catch(err => {
+  //     console.log('err', err)
+  //   })
+  // }
+  
+
+  checkForUpdate() {
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.checkForUpdate().then(() => {
+        console.log('Checking for updates...');
+      }).catch((err) => {
+        console.error('Error when checking for update', err);
+      });
+    }
+  }
+
+  updateToLatest(): void {
+    console.log('Updating to latest version.');
+    this.swUpdate.activateUpdate().then(() => document.location.reload());
+  }
+
+
+
+
+  
   addToHomeScreen() {
     this.deferredPrompt.prompt();
     this.deferredPrompt.userChoice
@@ -94,22 +134,6 @@ export class AppComponent implements OnInit {
         }
         this.deferredPrompt = null;
       });
-  }
-
-  public pushSubscription() { 
-    console.log('this.pushService', this.pushService.isEnabled)
-    if (!this.pushService.isEnabled) {
-      console.log('Notification is not enabled.');
-      return;
-    }
-
-    this.pushService.requestSubscription({
-      serverPublicKey: this.VAPID_PUBLIC_KEY,
-    }).then(sub => {
-      console.log('sub', JSON.stringify(sub));
-    }).catch(err => {
-      console.log('err', err)
-    })
   }
 
   public navigationInterceptor(event: RouterEvent): void {
