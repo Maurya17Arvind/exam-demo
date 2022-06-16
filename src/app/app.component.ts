@@ -81,57 +81,57 @@ export class AppComponent implements OnInit {
     })
   }
 
-  // public async pushNotifications() {
-  //   try {
-  //     const sub = await this.pushService.requestSubscription({
-  //       serverPublicKey: "BOBlBr9Yz5VqIb-MR49NHz4f-uIEklTjskFK28WlTYD3iZ3myNKqDLHTx-lFyZ_J9Q5_8mKd0rn-dzGlrQ0X8nY"
-  //     });
-  //     // this.notificationService.addSubscription(sub);
-  //   } catch (error) {
-  //     console.error('Could not subscribe due to :', error);
-  //   }
-  //   this.pushService.messages.subscribe((message) => {
-  //     console.log(message);
-  //   });
-  //   this.pushService.notificationClicks.subscribe((message) => {
-  //     console.log(message);
-  //   });
-  //   this.pushService.subscription.subscribe((subscription) => {
-  //     console.log(subscription);
-  //   });
-  // }
-
-  // public pushSubscription() {
-  //   console.log('this.pushService', this.pushService.isEnabled)
-  //   if (!this.pushService.isEnabled) {
-  //     console.log('Notification is not enabled.');
-  //     return;
-  //   }
-
-  //   this.pushService.requestSubscription({
-  //     serverPublicKey: this.VAPID_PUBLIC_KEY,
-  //   }).then(sub => {
-  //     console.log('sub', JSON.stringify(sub));
-  //   }).catch(err => {
-  //     console.log('err', err)
-  //   })
-  // }
-  
-  submitNotification(): void {
-    this.webNotificationService.subscribeToNotification();
+  public async pushNotifications() {
+    try {
+      const sub = await this.pushService.requestSubscription({
+        serverPublicKey: "BOBlBr9Yz5VqIb-MR49NHz4f-uIEklTjskFK28WlTYD3iZ3myNKqDLHTx-lFyZ_J9Q5_8mKd0rn-dzGlrQ0X8nY"
+      });
+      // this.notificationService.addSubscription(sub);
+    } catch (error) {
+      console.error('Could not subscribe due to :', error);
+    }
+    this.pushService.messages.subscribe((message) => {
+      console.log(message);
+    });
+    this.pushService.notificationClicks.subscribe((message) => {
+      console.log(message);
+    });
+    this.pushService.subscription.subscribe((subscription) => {
+      console.log(subscription);
+    });
   }
 
-
   public pushSubscription() {
+    console.log('this.pushService', this.pushService.isEnabled)
     if (!this.pushService.isEnabled) {
       console.log('Notification is not enabled.');
       return;
     }
 
     this.pushService.requestSubscription({
-      serverPublicKey: this.VAPID_PUBLIC_KEY
-    }).then(sub =>{console.log('sub :>> ', sub);}).catch(err => {console.log(err);})
+      serverPublicKey: this.VAPID_PUBLIC_KEY,
+    }).then(sub => {
+      console.log('sub', JSON.stringify(sub));
+    }).catch(err => {
+      console.log('err', err)
+    })
   }
+  
+  submitNotification(): void {
+    this.webNotificationService.subscribeToNotification();
+  }
+
+
+  // public pushSubscription() {
+  //   if (!this.pushService.isEnabled) {
+  //     console.log('Notification is not enabled.');
+  //     return;
+  //   }
+
+  //   this.pushService.requestSubscription({
+  //     serverPublicKey: this.VAPID_PUBLIC_KEY
+  //   }).then(sub =>{console.log('sub :>> ', sub);}).catch(err => {console.log(err);})
+  // }
   // checkForUpdate() {
   //   if (this.swUpdate.isEnabled) {
   //     this.swUpdate.checkForUpdate().then(() => {
