@@ -11,7 +11,7 @@ import { NotificationService } from './notification.service';
 })
 export class AppComponent implements OnInit {
   title = 'exam-demo';
-  private readonly VAPID_PUBLIC_KEY = "BEz285PUXIx76SaGW6IZxbBGM7jdGHzESF1r7dCjwoeuPtXATHxd_WMwoQO4prqSa2dUXohqXbB01ihKq6HOTTo";
+  private readonly VAPID_PUBLIC_KEY = "BEkV9Pvn49fRkuiOfD6kh7uEyBGRh8_ECPsXDEFa_fFBwUMx0aIUMEmq3pZVJmJjxuEp6pUP8nFdZDUMbBiBKyo";
   deferredPrompt: any;
   showButton = false;
 
@@ -44,6 +44,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.pushSubscription();
+
+
+    this.pushService.messages.subscribe(message => {console.log('message', message)})
+
     if (!navigator.onLine) {
       alert("Please check you connection");
     }
@@ -54,26 +59,26 @@ export class AppComponent implements OnInit {
     }
    
     // this.pushNotifications();
-    // this.handelVersionUpdate();
+    this.handelVersionUpdate();
   }
 
   //On reload site/app show alert if version update
-  // public handelVersionUpdate(): void {
-  //   this.serviceWorker.versionUpdates.subscribe((event: VersionEvent) => {
-  //     console.log('event', event)
-  //     if (event.type === "VERSION_READY" &&
-  //       confirm(
-  //         `New version ${(event as VersionReadyEvent).latestVersion.hash} available. Load New Version ?`
-  //       )
-  //     ) {
-  //       window.location.reload();
-  //     }
-  //   });
+  public handelVersionUpdate(): void {
+    this.swUpdate.versionUpdates.subscribe((event: VersionEvent) => {
+      console.log('event', event)
+      if (event.type === "VERSION_READY" &&
+        confirm(
+          `New version ${(event as VersionReadyEvent).latestVersion.hash} available. Load New Version ?`
+        )
+      ) {
+        window.location.reload();
+      }
+    });
 
-  //   this.serviceWorker.unrecoverable.subscribe((event: UnrecoverableStateEvent) => {
-  //     alert('Error reason :' + event.reason);
-  //   })
-  // }
+    this.swUpdate.unrecoverable.subscribe((event: UnrecoverableStateEvent) => {
+      alert('Error reason :' + event.reason);
+    })
+  }
 
   // public async pushNotifications() {
   //   try {
@@ -115,15 +120,27 @@ export class AppComponent implements OnInit {
   submitNotification(): void {
     this.webNotificationService.subscribeToNotification();
   }
-  checkForUpdate() {
-    if (this.swUpdate.isEnabled) {
-      this.swUpdate.checkForUpdate().then(() => {
-        console.log('Checking for updates...');
-      }).catch((err) => {
-        console.error('Error when checking for update', err);
-      });
+
+
+  public pushSubscription() {
+    if (!this.pushService.isEnabled) {
+      console.log('Notification is not enabled.');
+      return;
     }
+
+    this.pushService.requestSubscription({
+      serverPublicKey: this.VAPID_PUBLIC_KEY
+    }).then(sub =>{console.log('sub :>> ', sub);}).catch(err => {console.log(err);})
   }
+  // checkForUpdate() {
+  //   if (this.swUpdate.isEnabled) {
+  //     this.swUpdate.checkForUpdate().then(() => {
+  //       console.log('Checking for updates...');
+  //     }).catch((err) => {
+  //       console.error('Error when checking for update', err);
+  //     });
+  //   }
+  // }
 
   updateToLatest(): void {
     console.log('Updating to latest version.');

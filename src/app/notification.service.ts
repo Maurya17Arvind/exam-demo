@@ -16,7 +16,7 @@ export class NotificationService {
     this.swPush.requestSubscription({
       serverPublicKey: this.VAPID_PUBLIC_KEY
     })
-      .then(sub => {console.log("sub")})
+      .then(sub => this.sendToServer(sub))
       .catch(err => console.error('Could not subscribe to notifications', err));
   }
   sendToServer(params: any) {
