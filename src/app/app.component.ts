@@ -118,11 +118,6 @@ export class AppComponent implements OnInit {
   // }
   
   submitNotification(): void {
-    this.pushService.notificationClicks.subscribe(event => {
-      console.log('Received notification: ', event);
-      const url = event.notification.data.url;
-      window.open(url, '_blank');
-    });
     this.webNotificationService.subscribeToNotification();
   }
 
