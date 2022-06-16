@@ -20,6 +20,7 @@ export class NotificationService {
       .catch(err => console.error('Could not subscribe to notifications', err));
   }
   sendToServer(params: any) {
+    console.log('params', params)
     this.http.post(this.baseUrl, { notification: params }).subscribe();
   }
 }
