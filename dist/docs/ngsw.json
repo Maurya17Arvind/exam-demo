@@ -1,0 +1,102 @@
+{
+  "configVersion": 1,
+  "timestamp": 1655463691073,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.2320e1c876874b6f.js",
+        "/manifest.webmanifest",
+        "/polyfills.c27d284769f64379.js",
+        "/runtime.fa7ebd940f1ee53f.js",
+        "/styles.12917434c7ece6eb.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/cart.png",
+        "/assets/icons/exam-demo.png",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/img1.jpeg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "customer",
+      "patterns": [
+        "https:\\/\\/exam-demo-arvind\\.herokuapp\\.com\\/"
+      ],
+      "strategy": "performance",
+      "maxSize": 20,
+      "maxAge": 3600000,
+      "timeoutMs": 5000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "/assets/cart.png": "7bce40b64cc0dbfd8fe655118e23ed3dc62354bc",
+    "/assets/icons/exam-demo.png": "751405debc8e5f4545e34c3f7e20f8c479f51e47",
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/img1.jpeg": "ff533bd7eb1280cfdfce7fa436e86556c62f2478",
+    "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/index.html": "3fcee3ccd1c7d9a626e98ce52f5b929634ec9acd",
+    "/main.2320e1c876874b6f.js": "eb4745863a13d789eafd0833a39c824fd64223b4",
+    "/manifest.webmanifest": "fdb35a8271102fdfab158b917d1b3a00905865fa",
+    "/polyfills.c27d284769f64379.js": "93a7ffe215ac6425c06776b94e3521d9f45e4c7a",
+    "/runtime.fa7ebd940f1ee53f.js": "74b4f9bf3aba994a6840c1dbba069d959ea79f56",
+    "/styles.12917434c7ece6eb.css": "648871c96e351c301563257c2fea192b1dfb57fc"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
