@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { SwPush, SwUpdate, UnrecoverableStateEvent, VersionEvent, VersionReadyEvent } from '@angular/service-worker';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -27,7 +28,8 @@ export class AppComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private swUpdate: SwUpdate,
     private pushService: SwPush,
-    private webNotificationService: NotificationService
+    private webNotificationService: NotificationService,
+    private matSnackBar: MatSnackBar
   ) {
     this.router.events.subscribe((e: RouterEvent) => {
       this.navigationInterceptor(e);
@@ -47,12 +49,18 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.pushService.messages.subscribe(message => {console.log('message', message)})
 
-
     // check connection
-    if (!navigator.onLine) {
-      alert("Please check you connection");
-    }
+    addEventListener('offline', (e) => {
+      this.matSnackBar.open('Please check your connection', 'Ok', {
+        duration: 6000
+      })
+    })
 
+    addEventListener('online', (e) => {
+      this.matSnackBar.open('You are now online', 'Ok', {
+        duration: 3000
+      })
+    })
 
     if (!this.swUpdate.isEnabled) {
       console.log('Service worker is not enabled');
@@ -62,7 +70,6 @@ export class AppComponent implements OnInit {
     this.handelVersionUpdate();
   }
 
-  //On reload site/app show alert if version update
   public handelVersionUpdate(): void {
     this.swUpdate.versionUpdates.subscribe((event: VersionEvent) => {
       console.log('event', event)
@@ -80,6 +87,12 @@ export class AppComponent implements OnInit {
     })
   }
 
+  updateToLatest(): void {
+    console.log('Updating to latest version.');
+    this.swUpdate.activateUpdate().then(() => document.location.reload());
+  }
+
+
   public pushSubscription() {
     console.log('this.pushService', this.pushService.isEnabled)
     if (!this.pushService.isEnabled) {
@@ -96,12 +109,6 @@ export class AppComponent implements OnInit {
       console.log('err', err)
     })
   }
-  
-  updateToLatest(): void {
-    console.log('Updating to latest version.');
-    this.swUpdate.activateUpdate().then(() => document.location.reload());
-  }
-
 
 
 

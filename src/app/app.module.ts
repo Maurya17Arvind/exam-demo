@@ -16,7 +16,7 @@ import { AuthGuard } from './Authguard/auth.guard';
 import { AuthService } from './Authguard/auth.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -36,6 +36,7 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
+    MatSnackBarModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: true,
       // Register the ServiceWorker as soon as the application is stable
