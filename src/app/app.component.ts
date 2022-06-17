@@ -54,13 +54,11 @@ export class AppComponent implements OnInit {
     }
 
 
-    // this.pushSubscription();
     if (!this.swUpdate.isEnabled) {
       console.log('Service worker is not enabled');
       return;
     }
    
-    // this.pushNotifications();
     this.handelVersionUpdate();
   }
 
@@ -99,10 +97,6 @@ export class AppComponent implements OnInit {
     })
   }
   
-  // submitNotification(): void {
-  //   this.webNotificationService.subscribeToNotification();
-  // }
-
   updateToLatest(): void {
     console.log('Updating to latest version.');
     this.swUpdate.activateUpdate().then(() => document.location.reload());
