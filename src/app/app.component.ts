@@ -11,7 +11,7 @@ import { NotificationService } from './notification.service';
 })
 export class AppComponent implements OnInit {
   title = 'exam-demo';
-  private readonly VAPID_PUBLIC_KEY = "BEkV9Pvn49fRkuiOfD6kh7uEyBGRh8_ECPsXDEFa_fFBwUMx0aIUMEmq3pZVJmJjxuEp6pUP8nFdZDUMbBiBKyo";
+  private readonly VAPID_PUBLIC_KEY = "BKNeGqOcQtPcNRQq1UTWkwval2C6uOjAVw-TdHhzCJwl5hlaV3ieKn3evz6R84hQKO0kW_MNUiOaadaL6fnusJI";
   deferredPrompt: any;
   showButton = false;
 
@@ -45,14 +45,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pushSubscription();
-
-
     this.pushService.messages.subscribe(message => {console.log('message', message)})
 
+
+    // check connection
     if (!navigator.onLine) {
       alert("Please check you connection");
     }
+
+
     // this.pushSubscription();
     if (!this.swUpdate.isEnabled) {
       console.log('Service worker is not enabled');
@@ -81,26 +82,6 @@ export class AppComponent implements OnInit {
     })
   }
 
-  public async pushNotifications() {
-    try {
-      const sub = await this.pushService.requestSubscription({
-        serverPublicKey: "BOBlBr9Yz5VqIb-MR49NHz4f-uIEklTjskFK28WlTYD3iZ3myNKqDLHTx-lFyZ_J9Q5_8mKd0rn-dzGlrQ0X8nY"
-      });
-      // this.notificationService.addSubscription(sub);
-    } catch (error) {
-      console.error('Could not subscribe due to :', error);
-    }
-    this.pushService.messages.subscribe((message) => {
-      console.log(message);
-    });
-    this.pushService.notificationClicks.subscribe((message) => {
-      console.log(message);
-    });
-    this.pushService.subscription.subscribe((subscription) => {
-      console.log(subscription);
-    });
-  }
-
   public pushSubscription() {
     console.log('this.pushService', this.pushService.isEnabled)
     if (!this.pushService.isEnabled) {
@@ -111,35 +92,15 @@ export class AppComponent implements OnInit {
     this.pushService.requestSubscription({
       serverPublicKey: this.VAPID_PUBLIC_KEY,
     }).then(sub => {
-      console.log('sub', JSON.stringify(sub));
+      this.webNotificationService.sendToServer(sub);
+      console.log('sub', sub);
     }).catch(err => {
       console.log('err', err)
     })
   }
   
-  submitNotification(): void {
-    this.webNotificationService.subscribeToNotification();
-  }
-
-
-  // public pushSubscription() {
-  //   if (!this.pushService.isEnabled) {
-  //     console.log('Notification is not enabled.');
-  //     return;
-  //   }
-
-  //   this.pushService.requestSubscription({
-  //     serverPublicKey: this.VAPID_PUBLIC_KEY
-  //   }).then(sub =>{console.log('sub :>> ', sub);}).catch(err => {console.log(err);})
-  // }
-  // checkForUpdate() {
-  //   if (this.swUpdate.isEnabled) {
-  //     this.swUpdate.checkForUpdate().then(() => {
-  //       console.log('Checking for updates...');
-  //     }).catch((err) => {
-  //       console.error('Error when checking for update', err);
-  //     });
-  //   }
+  // submitNotification(): void {
+  //   this.webNotificationService.subscribeToNotification();
   // }
 
   updateToLatest(): void {

@@ -24,6 +24,7 @@
     "@angular/service-worker": "~13.1.0",
     "@ng-bootstrap/ng-bootstrap": "^11.0.0",
     "bootstrap": "^5.1.3",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "ngx-pagination": "^5.1.1",
     "ngx-spinner": "^13.0.0",
@@ -33,6 +34,7 @@
     "spinners-angular": "0.0.5",
     "tslib": "^2.3.0",
     "typescript": "~4.5.2",
+    "web-push": "^3.5.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
